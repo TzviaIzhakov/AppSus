@@ -10,11 +10,11 @@ export const mailService = {
   getDefaultFilter,
 };
 const MAILS_KEY = 'mailsDB';
-
 _createEmails();
+
 function _createEmails() {
   let emails = utilService.loadFromStorage(MAILS_KEY);
-  if (!emails) {
+  if (!emails || !emails.length) {
     emails = [
         {
           id: 'e101',
