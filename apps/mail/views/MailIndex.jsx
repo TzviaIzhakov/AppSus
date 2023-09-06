@@ -11,13 +11,19 @@ export function MailIndex() {
         mailService.getEmails()
             .then(setEmails)
     })
-
+function onRemoveEmail(emailId){
+    mailService.remove(emailId)
+    .then(() => {
+        setBooks(prevEmails => prevEmails.filter(email => email.id !== emailId))
+        // showSuccessMsg(`book Removed! ${emailId}`)
+    })
+}
   
 
     if (!emails) return <div>loading...</div>
     return <table className="emails-table">
         <tbody>
-          <MailList emails={emails}/>
+          <MailList emails={emails} onRemove={onRemoveEmail}/>
         </tbody>
     </table>
 }

@@ -97,6 +97,7 @@ function getDayName(date, locale) {
   date = new Date(date);
   return date.toLocaleDateString(locale, { weekday: 'long' });
 }
+<<<<<<< HEAD
 
 function getMonthName(date) {
   const monthNames = [
@@ -114,4 +115,25 @@ function getMonthName(date) {
     'December',
   ];
   return monthNames[date.getMonth()];
+=======
+function getDate(stamp) {
+    const date = new Date(stamp)
+    return date.toLocaleDateString()
+}
+
+function getMonthName(date) {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
+    return monthNames[date.getMonth()]
+}
+
+function saveToStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+function loadFromStorage(key) {
+    const data = localStorage.getItem(key)
+    return (data) ? JSON.parse(data) : undefined
+>>>>>>> 3033092ea3c56668a0437a5f8dbca1831230816a
 }
