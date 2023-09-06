@@ -3,7 +3,7 @@ const { useNavigate, useParams } = ReactRouterDOM;
 import { noteService } from '../services/note.service.js';
 export function NoteAdd({ saveNote }) {
   const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote());
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
   function handleChange({ target }) {
     const field = target.name;

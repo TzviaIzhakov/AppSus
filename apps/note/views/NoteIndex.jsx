@@ -1,13 +1,14 @@
 import { noteService } from '../services/note.service.js';
 import { NoteList } from '../cmps/NoteList.jsx';
 import { NoteAdd } from '../cmps/NoteAdd.jsx';
-
 // const { Outlet, Link } = ReactRouterDOM;
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 const { useState, useEffect } = React;
+const { useNavigate, useParams } = ReactRouterDOM;
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('mount');
@@ -21,7 +22,9 @@ export function NoteIndex() {
     noteService
       .save(noteToEdit)
       .then((savedNote) => {
-        setNotes(notes);
+        setNotes((prevNotes) => prevNotes.map((note) => note));
+        // navigate('/note');
+
         console.log(`Note Edited! ${savedNote.id}`);
         // showSuccessMsg(`Note Edited! ${savedBook.id}`);
       })
