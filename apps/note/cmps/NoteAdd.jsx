@@ -2,8 +2,10 @@ const { useState, useEffect } = React;
 const { useNavigate, useParams } = ReactRouterDOM;
 import { noteService } from '../services/note.service.js';
 export function NoteAdd({ saveNote }) {
-  const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote());
   const [typeInput, setTypeInput] = useState('text');
+  const [noteToEdit, setNoteToEdit] = useState(
+    noteService.getEmptyNote(typeInput)
+  );
 
   function handleChange({ target }) {
     const field = target.name;
@@ -36,10 +38,12 @@ export function NoteAdd({ saveNote }) {
 
   function onSaveNote(ev) {
     ev.preventDefault();
+
     saveNote(noteToEdit);
   }
 
-  function onSetInputType(typeInput) {
+  function onSetInputType(typeInput, ev) {
+    ev.preventDefault();
     setTypeInput(typeInput);
   }
 
@@ -48,9 +52,9 @@ export function NoteAdd({ saveNote }) {
       <label htmlFor="Add Note Please" id="txt"></label>
       <section>
         <input type={`${typeInput}`} onChange={handleChange} name="txt" />
-        <button onClick={() => onSetInputType('file')}>Image</button>
-        <button onClick={() => onSetInputType('text')}>To Do</button>
-        <button onClick={() => onSetInputType('text')}>Text</button>
+        <button onClick={(ev) => onSetInputType('file', ev)}>Image</button>
+        <button onClick={(ev) => onSetInputType('text', ev)}>To Do</button>
+        <button onClick={(ev) => onSetInputType('text', ev)}>Text</button>
       </section>
       <button>Add</button>
     </form>

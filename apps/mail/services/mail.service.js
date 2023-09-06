@@ -3,22 +3,13 @@ import { storageService } from '../../../services/async-storage.service.js';
 import { utilService } from '../../../services/util.service.js';
 
 export const mailService = {
-<<<<<<< HEAD
-    getEmails,
-    get,
-    save,
-    remove,
-    getDefaultFilter
-}
-const Mails_KEY = 'mailsDB'
-=======
   getEmails,
   get,
   save,
   remove,
+  getDefaultFilter,
 };
 const Mails_KEY = 'mailsDB';
->>>>>>> b1186c7e5e1e99ca94a91bd51a79e7e08fc7b4ad
 
 const emails = [
   {
@@ -63,57 +54,25 @@ const emails = [
   },
 ];
 
-<<<<<<< HEAD
-]
-
-//  utilService.saveToStorage(Mails_KEY,emails)
-=======
 // utilService.saveToStorage(Mails_KEY, emails);
->>>>>>> b1186c7e5e1e99ca94a91bd51a79e7e08fc7b4ad
 
 const loggedinUser = {
   email: 'user@appsus.com',
   fullname: 'Mahatma Appsus',
 };
 
-<<<<<<< HEAD
 function getEmails(filterBy = {}) {
-    return storageService.query(Mails_KEY)
-        .then(emails => {
-            console.log(emails);
-            if (filterBy.subject) {
-                const regex = new RegExp(filterBy.subject, 'i')
-                emails = emails.filter(email => regex.test(email.subject))
-            }
-            if (filterBy.isRead) {
-                emails = emails.filter(email => email.isRead === true)
-            }
-            return emails
-        })
-}
-
-function get(id) {
-    return storageService.get(Mails_KEY, id)
-}
-
-function save(email) {
-    if (email.id) {
-        return storageService.put(Mails_KEY, email)
-    } else {
-        return storageService.post(Mails_KEY, email)
+  return storageService.query(Mails_KEY).then((emails) => {
+    console.log(emails);
+    if (filterBy.subject) {
+      const regex = new RegExp(filterBy.subject, 'i');
+      emails = emails.filter((email) => regex.test(email.subject));
     }
-}
-
-function remove(emailId) {
-    return storageService.remove(Mails_KEY, emailId)
-}
-
-function getDefaultFilter() {
-    return { subject: '', isRead: false }
-}
-=======
-function getEmails() {
-  return storageService.query(Mails_KEY);
+    if (filterBy.isRead) {
+      emails = emails.filter((email) => email.isRead === true);
+    }
+    return emails;
+  });
 }
 
 function get(id) {
@@ -131,4 +90,7 @@ function save(email) {
 function remove(emailId) {
   return storageService.remove(Mails_KEY, emailId);
 }
->>>>>>> b1186c7e5e1e99ca94a91bd51a79e7e08fc7b4ad
+
+function getDefaultFilter() {
+  return { subject: '', isRead: false };
+}
