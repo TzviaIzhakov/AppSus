@@ -15,7 +15,7 @@ export function MailIndex() {
     useEffect(() => {
         mailService.getEmails(filterBy)
             .then(setEmails)
-    })
+    },[filterBy])
 
     function onSetFilterBy(filterBy) {
         console.log('filterBy:', filterBy)

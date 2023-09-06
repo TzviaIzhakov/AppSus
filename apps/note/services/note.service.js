@@ -87,7 +87,7 @@ function getEmptyNote(typeInput) {
     return {
       id: '',
       createdAt: 0,
-      type: 'NoteImg',
+      type: 'NoteTxt',
       isPinned: false,
       style: {
         backgroundColor: '#ffffff',
