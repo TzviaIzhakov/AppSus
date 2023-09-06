@@ -15,7 +15,7 @@ export function NoteIndex() {
       console.log(notes);
       setNotes(notes);
     });
-  }, [notes]);
+  }, []);
 
   function saveNote(noteToEdit) {
     noteService
