@@ -68,9 +68,9 @@ function save(note) {
   }
 }
 
-function getEmptyNote(typeInput) {
+function getEmptyNote(currCopm) {
   //right now it giving me the defualt note as type: txt
-  if (typeInput === 'text')
+  if (currCopm === 'txt') {
     return {
       id: '',
       createdAt: 0,
@@ -83,11 +83,11 @@ function getEmptyNote(typeInput) {
         txt: '',
       },
     };
-  else if (typeInput == 'file') {
+  } else if (currCopm === 'url') {
     return {
       id: '',
       createdAt: 0,
-      type: 'NoteTxt',
+      type: 'NoteImg',
       isPinned: false,
       style: {
         backgroundColor: '#ffffff',
@@ -95,6 +95,20 @@ function getEmptyNote(typeInput) {
       info: {
         url: '',
         title: '',
+      },
+    };
+  } else if (currCopm === 'todos') {
+    return {
+      id: '',
+      createdAt: 0,
+      type: 'NoteTodos',
+      isPinned: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        title: '',
+        todos: [],
       },
     };
   }
