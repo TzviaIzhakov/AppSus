@@ -11,12 +11,18 @@ const { useState, useEffect } = React
 export function MailIndex() {
     const [emails, setEmails] = useState()
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-
+    const [sent,setSent] = useState(false)
 
     useEffect(() => {
-        mailService.getEmails(filterBy)
-            .then(setEmails)
-    }, [filterBy])
+        if (!sent) {
+            mailService.getEmails(filterBy)
+                .then(setEmails)
+        }
+        if (sent) {
+            mailService.getSentEmails(filterBy)
+                .then(setEmails)
+        }
+    }, [filterBy,sent])
 
     function onSetFilterBy(filterBy) {
         console.log('filterBy:', filterBy)
@@ -25,11 +31,14 @@ export function MailIndex() {
     function onRemoveEmail(emailId) {
         mailService.remove(emailId)
             .then(() => {
-                setBooks(prevEmails => prevEmails.filter(email => email.id !== emailId))
+                setEmails(prevEmails => prevEmails.filter(email => email.id !== emailId))
                 // showSuccessMsg(`book Removed! ${emailId}`)
             })
     }
-
+function changeSent(state){
+    setSent(state)
+    setEmails(null)
+}
 
     if (!emails) return <div>loading...</div>
     return (
@@ -41,10 +50,12 @@ export function MailIndex() {
             </header>
             <table className="emails-table">
                 <tbody>
-                    <MailList emails={emails} onRemove={onRemoveEmail} />
+                    <MailList sent={sent} emails={emails} onRemove={onRemoveEmail} />
                 </tbody>
             </table>
             <button>{<Link to="/mail/compose">compsoe</Link>}</button>
+            <button onClick={()=>changeSent(true)}>Sent</button>
+            <button onClick={()=>changeSent(false)}>Inbox</button>
         </section>)
 }
 
