@@ -1,0 +1,17 @@
+.email-header{
+    display: grid;
+   grid-auto-flow: column;
+   align-items: center;
+   background-color: white;
+}
+
+.logo{
+    margin-inline-start: 1.5em;
+    margin-inline-end: 1.5em;
+    width:40px;
+    height: 30px;
+}
+
+.title{
+    font-size: 22px;
+}

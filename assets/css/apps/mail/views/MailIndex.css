@@ -6,13 +6,21 @@
 }
 
 .read {
-  background-color: rgb(198, 198, 198);
+  background-color: rgb(201, 239, 255);
+}
+.emails-table tr{
+   border-bottom: 1px solid gray;
+}
+.emails-table .remove{
+   display: grid;
+   justify-items: center;
+   align-items: center;
 }
 
 .emails-table tr:hover {
   border: 1px solid gray;
   box-shadow: 5px 3px 5px #888888;
-  transition: 0.3s;
+  transition: 0.1s;
 }
 
 .emails-table .email-body {

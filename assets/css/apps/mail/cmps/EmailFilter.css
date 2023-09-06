@@ -1,0 +1,17 @@
+.emails-filter{
+    display: grid;
+    grid-auto-flow: column;
+    justify-items:center;
+  
+}
+
+
+.search-bar{
+height: 2rem;
+border-radius: 555px;
+width: 35rem;
+height: 40px;
+padding-left: 20px;
+font-size: 1.5em;
+}
+
