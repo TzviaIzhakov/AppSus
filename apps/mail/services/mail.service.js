@@ -8,6 +8,7 @@ export const mailService = {
   save,
   remove,
   getDefaultFilter,
+  getEmptyEmail
 };
 const MAILS_KEY = 'mailsDB';
 _createEmails();
@@ -98,4 +99,15 @@ function remove(emailId) {
 
 function getDefaultFilter() {
   return { subject: '', isRead: false };
+}
+
+function getEmptyEmail(){
+  return{
+    id: utilService.makeId(),
+    subject: '',
+    body: '',
+    sentAt: 1551133930594,
+    from: 'user@appsus.com',
+    to: '',
+  }
 }

@@ -1,4 +1,5 @@
 import { EmailFilter } from "../cmps/EmailFilter.jsx"
+import { EmailHeader } from "../cmps/EmailHeader.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { mailService } from "../services/mail.service.js"
 
@@ -15,7 +16,7 @@ export function MailIndex() {
     useEffect(() => {
         mailService.getEmails(filterBy)
             .then(setEmails)
-    },[filterBy])
+    }, [filterBy])
 
     function onSetFilterBy(filterBy) {
         console.log('filterBy:', filterBy)
@@ -33,12 +34,17 @@ export function MailIndex() {
     if (!emails) return <div>loading...</div>
     return (
         <section>
-            <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            <header className="email-header">
+                <EmailHeader />
+
+                <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            </header>
             <table className="emails-table">
                 <tbody>
                     <MailList emails={emails} onRemove={onRemoveEmail} />
                 </tbody>
             </table>
+            <button>{<Link to="/mail/compose">compsoe</Link>}</button>
         </section>)
 }
 
