@@ -62,7 +62,6 @@ export function NoteAdd({ saveNote }) {
     <form onSubmit={onSaveNote}>
       <label htmlFor="Add Note Please" id="txt"></label>
       <section>
-        //txt,url,todos
         <input
           type={`${typeInput}`}
           onChange={handleChange}

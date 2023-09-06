@@ -1,3 +1,7 @@
+import { NoteImg } from '../cmps/NoteImg.jsx';
+import { NoteTodos } from '../cmps/NoteTodos.jsx';
+import { NoteTxt } from '../cmps/NoteTxt.jsx';
+
 export function NotePreview({ note }) {
   return (
     <section className="note-preview">
@@ -12,39 +16,6 @@ export function NotePreview({ note }) {
         />
       </div>
     </section>
-  );
-}
-
-function NoteTodos({ info }) {
-  const { title, todos } = info;
-  return (
-    <article>
-      <h1>{title}</h1>
-      <ul>
-        {todos.map((todo, idx) => {
-          return <li key={idx}>{todo.txt}</li>;
-        })}
-      </ul>
-    </article>
-  );
-}
-
-function NoteImg({ info }) {
-  const { url, title } = info;
-  return (
-    <article>
-      <h1>{title}</h1>
-      <img src={`${url}`} alt="img-user" />
-    </article>
-  );
-}
-
-function NoteTxt({ info }) {
-  const { txt } = info;
-  return (
-    <article>
-      <p>{txt}</p>
-    </article>
   );
 }
 
