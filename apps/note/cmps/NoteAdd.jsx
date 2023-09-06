@@ -3,9 +3,18 @@ const { useNavigate, useParams } = ReactRouterDOM;
 import { noteService } from '../services/note.service.js';
 export function NoteAdd({ saveNote }) {
   const [typeInput, setTypeInput] = useState('text');
+  const [currComp, setCurrCopm] = useState('NoteTxt');
   const [noteToEdit, setNoteToEdit] = useState(
-    noteService.getEmptyNote(typeInput)
+    noteService.getEmptyNote(currComp)
   );
+  {
+    /* <img class="gkA7Yd-HiaYvf HiaYvf-Vj7tjb" loading="lazy" tabindex="0" alt src=""></img> */
+  }
+
+  useEffect(() => {
+    setNoteToEdit(noteService.getEmptyNote(currComp));
+    console.log(currComp);
+  }, [currComp]);
 
   function handleChange({ target }) {
     const field = target.name;
@@ -30,6 +39,7 @@ export function NoteAdd({ saveNote }) {
       [field]: value,
     };
 
+    console.log(info, 'info');
     setNoteToEdit((prevNoteToEdit) => ({
       ...prevNoteToEdit,
       info,
@@ -38,23 +48,35 @@ export function NoteAdd({ saveNote }) {
 
   function onSaveNote(ev) {
     ev.preventDefault();
-
     saveNote(noteToEdit);
   }
 
   function onSetInputType(typeInput, ev) {
     ev.preventDefault();
     setTypeInput(typeInput);
+    setCurrCopm(ev.target.name);
+    console.log(currComp);
   }
 
   return (
     <form onSubmit={onSaveNote}>
       <label htmlFor="Add Note Please" id="txt"></label>
       <section>
-        <input type={`${typeInput}`} onChange={handleChange} name="txt" />
-        <button onClick={(ev) => onSetInputType('file', ev)}>Image</button>
-        <button onClick={(ev) => onSetInputType('text', ev)}>To Do</button>
-        <button onClick={(ev) => onSetInputType('text', ev)}>Text</button>
+        //txt,url,todos
+        <input
+          type={`${typeInput}`}
+          onChange={handleChange}
+          name={`${currComp}`}
+        />
+        <button onClick={(ev) => onSetInputType('file', ev)} name="url">
+          Image
+        </button>
+        <button onClick={(ev) => onSetInputType('text', ev)} name="todos">
+          To Do
+        </button>
+        <button onClick={(ev) => onSetInputType('text', ev)} name="txt">
+          Text
+        </button>
       </section>
       <button>Add</button>
     </form>
