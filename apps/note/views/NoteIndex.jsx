@@ -1,5 +1,6 @@
 import { noteService } from '../services/note.service.js';
 import { NoteList } from '../cmps/NoteList.jsx';
+import { NoteDetails } from '../views/NoteDetails.jsx';
 import { NoteAdd } from '../cmps/NoteAdd.jsx';
 // const { Outlet, Link } = ReactRouterDOM;
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
@@ -7,6 +8,7 @@ const { useState, useEffect } = React;
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null);
+  const [selectedNoteId, setSelectedNoteId] = useState(null);
 
   useEffect(() => {
     console.log('mount');
@@ -43,14 +45,28 @@ export function NoteIndex() {
       });
   }
 
+  function onSelectNoteId(noteId) {
+    setSelectedNoteId(noteId);
+  }
+
   if (!notes) return <div>Loading...</div>;
 
   return (
     <section className="note-index">
       <React.Fragment>
         <NoteAdd saveNote={saveNote}></NoteAdd>
-        <NoteList notes={notes} onRemoveNote={onRemoveNote}></NoteList>
+        <NoteList
+          notes={notes}
+          onRemoveNote={onRemoveNote}
+          onSelectNoteId={onSelectNoteId}
+        ></NoteList>
       </React.Fragment>
+      {selectedNoteId && (
+        <NoteDetails
+          onBack={() => onSelectNoteId(null)}
+          noteId={selectedNoteId}
+        />
+      )}
     </section>
   );
 }
