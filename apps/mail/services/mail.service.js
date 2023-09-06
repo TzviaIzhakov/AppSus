@@ -8,9 +8,12 @@ export const mailService = {
   save,
   remove,
   getDefaultFilter,
-  getEmptyEmail
+  getEmptyEmail,
+  saveSent,
+  getSentEmails
 };
 const MAILS_KEY = 'mailsDB';
+
 _createEmails();
 
 function _createEmails() {
@@ -69,14 +72,25 @@ const loggedinUser = {
 
 function getEmails(filterBy = {}) {
   return storageService.query(MAILS_KEY).then((emails) => {
+    emails= emails.filter(email=> email.from!==loggedinUser.email)
     console.log(emails);
     if (filterBy.subject) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
     }
-    if (filterBy.isRead) {
-      emails = emails.filter((email) => email.isRead === true);
+  
+    return emails;
+  });
+}
+function getSentEmails(filterBy = {}) {
+  return storageService.query(MAILS_KEY).then((emails) => {
+  emails= emails.filter(email=> email.from===loggedinUser.email)
+  console.log(emails);
+    if (filterBy.subject) {
+      const regex = new RegExp(filterBy.subject, 'i');
+      emails = emails.filter((email) => regex.test(email.subject));
     }
+   
     return emails;
   });
 }
@@ -103,11 +117,15 @@ function getDefaultFilter() {
 
 function getEmptyEmail(){
   return{
-    id: utilService.makeId(),
+  
     subject: '',
     body: '',
     sentAt: 1551133930594,
     from: 'user@appsus.com',
     to: '',
   }
+}
+
+function saveSent(email) {
+  return storageService.post(MAILS_KEY, email);
 }

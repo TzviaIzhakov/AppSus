@@ -1,13 +1,13 @@
 const { useParams, useNavigate, Link } = ReactRouterDOM
-import { LongTxt } from "../../../cmps/long-txt.jsx"
+
 import { utilService } from "../../../services/util.service.js"
 
-export function EmailPreview({email,onRemove}) {
+export function EmailPreview({email,onRemove,sent}) {
 
 
   return  (
     <React.Fragment>
-  <td>{email.from}</td>
+  <td>{sent?'To: '+ email.to: email.from}</td>
   <td> {email.subject}</td>
   <td className="email-body">{email.body}</td>
   <td> {utilService.getDate(email.sentAt)}</td>
