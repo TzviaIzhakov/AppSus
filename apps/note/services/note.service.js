@@ -68,20 +68,36 @@ function save(note) {
   }
 }
 
-function getEmptyNote() {
+function getEmptyNote(typeInput) {
   //right now it giving me the defualt note as type: txt
-  return {
-    id: '',
-    createdAt: 0,
-    type: 'NoteTxt',
-    isPinned: false,
-    style: {
-      backgroundColor: '#ffffff',
-    },
-    info: {
-      txt: '',
-    },
-  };
+  if (typeInput === 'text')
+    return {
+      id: '',
+      createdAt: 0,
+      type: 'NoteTxt',
+      isPinned: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        txt: '',
+      },
+    };
+  else if (typeInput == 'file') {
+    return {
+      id: '',
+      createdAt: 0,
+      type: 'NoteTxt',
+      isPinned: false,
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      info: {
+        url: '',
+        title: '',
+      },
+    };
+  }
 }
 
 function getNextNoteId(noteId) {
