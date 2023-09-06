@@ -3,7 +3,7 @@ const { useNavigate, useParams } = ReactRouterDOM;
 import { noteService } from '../services/note.service.js';
 export function NoteAdd({ saveNote }) {
   const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote());
-  //   const navigate = useNavigate();
+  const [typeInput, setTypeInput] = useState('text');
 
   function handleChange({ target }) {
     const field = target.name;
@@ -39,10 +39,19 @@ export function NoteAdd({ saveNote }) {
     saveNote(noteToEdit);
   }
 
+  function onSetInputType(typeInput) {
+    setTypeInput(typeInput);
+  }
+
   return (
     <form onSubmit={onSaveNote}>
       <label htmlFor="Add Note Please" id="txt"></label>
-      <input type="text" onChange={handleChange} name="txt" />
+      <section>
+        <input type={`${typeInput}`} onChange={handleChange} name="txt" />
+        <button onClick={() => onSetInputType('file')}>Image</button>
+        <button onClick={() => onSetInputType('text')}>To Do</button>
+        <button onClick={() => onSetInputType('text')}>Text</button>
+      </section>
       <button>Add</button>
     </form>
   );

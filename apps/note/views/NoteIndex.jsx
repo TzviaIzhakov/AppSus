@@ -4,11 +4,9 @@ import { NoteAdd } from '../cmps/NoteAdd.jsx';
 // const { Outlet, Link } = ReactRouterDOM;
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 const { useState, useEffect } = React;
-const { useNavigate, useParams } = ReactRouterDOM;
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('mount');
@@ -22,9 +20,7 @@ export function NoteIndex() {
     noteService
       .save(noteToEdit)
       .then((savedNote) => {
-        setNotes((prevNotes) => prevNotes.map((note) => note));
-        // navigate('/note');
-
+        setNotes((prevNotes) => [...prevNotes, savedNote]);
         console.log(`Note Edited! ${savedNote.id}`);
         // showSuccessMsg(`Note Edited! ${savedBook.id}`);
       })
@@ -34,13 +30,26 @@ export function NoteIndex() {
       });
   }
 
+  function onRemoveNote(noteId) {
+    noteService
+      .remove(noteId)
+      .then(() => {
+        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+        showSuccessMsg(`Book Removed! ${noteId}`);
+      })
+      .catch((err) => {
+        console.log('err:', err);
+        showErrorMsg('Problem Removing ' + noteId);
+      });
+  }
+
   if (!notes) return <div>Loading...</div>;
 
   return (
     <section className="note-index">
       <React.Fragment>
         <NoteAdd saveNote={saveNote}></NoteAdd>
-        <NoteList notes={notes}></NoteList>
+        <NoteList notes={notes} onRemoveNote={onRemoveNote}></NoteList>
       </React.Fragment>
     </section>
   );

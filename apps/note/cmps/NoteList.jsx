@@ -1,6 +1,6 @@
 import { NotePreview } from '../cmps/NotePreview.jsx';
 
-export function NoteList({ notes }) {
+export function NoteList({ notes, onRemoveNote }) {
   return (
     <ul>
       {notes.map((note) => {
@@ -8,7 +8,8 @@ export function NoteList({ notes }) {
           <li key={note.id}>
             <NotePreview note={note} />
             <section className="user-tools-btns">
-              <button>Delete</button>
+              <button onClick={() => onRemoveNote(note.id)}>Delete</button>
+              <button>Update</button>
             </section>
           </li>
         );
