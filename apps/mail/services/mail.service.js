@@ -2,13 +2,14 @@
 import { storageService } from '../../../services/async-storage.service.js';
 import { utilService } from '../../../services/util.service.js';
 
-export const mailService={
+export const mailService = {
     getEmails,
     get,
     save,
-    remove
+    remove,
+    getDefaultFilter
 }
-const Mails_KEY='mailsDB'
+const Mails_KEY = 'mailsDB'
 
 const emails = [
     {
@@ -54,28 +55,43 @@ const emails = [
 
 ]
 
-// utilService.saveToStorage(Mails_KEY,emails)
+//  utilService.saveToStorage(Mails_KEY,emails)
 
 const loggedinUser = {
     email: 'user@appsus.com', fullname: 'Mahatma Appsus'
 }
 
-function getEmails() {
+function getEmails(filterBy = {}) {
     return storageService.query(Mails_KEY)
+        .then(emails => {
+            console.log(emails);
+            if (filterBy.subject) {
+                const regex = new RegExp(filterBy.subject, 'i')
+                emails = emails.filter(email => regex.test(email.subject))
+            }
+            if (filterBy.isRead) {
+                emails = emails.filter(email => email.isRead === true)
+            }
+            return emails
+        })
 }
 
-function get(id){
-  return storageService.get(Mails_KEY,id)
+function get(id) {
+    return storageService.get(Mails_KEY, id)
 }
 
-function save(email){
+function save(email) {
     if (email.id) {
         return storageService.put(Mails_KEY, email)
-      } else {
+    } else {
         return storageService.post(Mails_KEY, email)
-      }
+    }
 }
 
 function remove(emailId) {
     return storageService.remove(Mails_KEY, emailId)
-  }
+}
+
+function getDefaultFilter() {
+    return { subject: '', isRead: false }
+}
