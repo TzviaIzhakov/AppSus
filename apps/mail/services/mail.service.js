@@ -58,6 +58,7 @@ function _createEmails() {
       },
     ];
   }
+  utilService.saveToStorage(MAILS_KEY, emails);
 }
 
 const loggedinUser = {
