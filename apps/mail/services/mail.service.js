@@ -57,8 +57,8 @@ function _createEmails() {
         to: 'user@appsus.com',
       },
     ];
+    utilService.saveToStorage(MAILS_KEY, emails);
   }
-  utilService.saveToStorage(MAILS_KEY, emails);
 }
 
 const loggedinUser = {

@@ -1,25 +1,24 @@
- /* mail index  */
+/* mail index  */
 
- .emails-table{
-border-collapse: collapse;
-    width: 100%;
-    background-color: aqua;
- }
+.emails-table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
- .read{
-    background-color: rgb(198, 198, 198);
- }
+.read {
+  background-color: rgb(198, 198, 198);
+}
 
- .emails-table  tr:hover{
-    border: 1px  solid gray;
-    box-shadow: 5px 3px 5px #888888;
-    transition: 0.3s;
- }
+.emails-table tr:hover {
+  border: 1px solid gray;
+  box-shadow: 5px 3px 5px #888888;
+  transition: 0.3s;
+}
 
- .emails-table .email-body{
-   max-width: 200px;
-  
-    overflow: hidden; /* Hide overflowing content */
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-   }
+.emails-table .email-body {
+  max-width: 200px;
+
+  overflow: hidden; /* Hide overflowing content */
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis;
+}
