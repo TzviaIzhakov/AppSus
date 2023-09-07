@@ -1,12 +1,21 @@
 /* mail index  */
+.emails-container{
+  width: 80vw;
+  margin: auto;
+  border-radius: 15px;
+  background-color: white;
+  padding: 10px;
+}
+
 
 .emails-table {
+  margin: auto;
   border-collapse: collapse;
-  width: 100%;
+  width: 95%;
 }
 
 .read {
-  background-color: var(--main-bg-color);
+  background-color: #f2f6fc;
 }
 .emails-table tr{
    border-bottom: 1px solid gray;

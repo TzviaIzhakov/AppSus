@@ -53,18 +53,19 @@ function changeSent(state){
     return (
         <section>
             <header className="email-header">
-                <EmailHeader />
+                <EmailHeader changeSent={changeSent}/>
 
                 <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             </header>
+            <section className="emails-container">
             <table className="emails-table">
                 <tbody>
                     <MailList sent={sent} emails={emails} onRemove={onRemoveEmail} />
                 </tbody>
             </table>
-            <button>{<Link to="/mail/compose">compsoe</Link>}</button>
-            <button onClick={()=>changeSent(true)}>Sent</button>
-            <button onClick={()=>changeSent(false)}>Inbox</button>
+            </section>
+           
+
             <section>
                 <Outlet />
             </section>
