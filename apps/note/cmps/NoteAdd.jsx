@@ -57,6 +57,7 @@ export function NoteAdd({ saveNote }) {
     };
 
     console.log(info, 'info');
+    console.log('some');
     setNoteToEdit((prevNoteToEdit) => ({
       ...prevNoteToEdit,
       info,
