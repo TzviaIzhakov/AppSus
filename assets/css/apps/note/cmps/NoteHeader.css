@@ -1,0 +1,28 @@
+.note-header {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: white;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  font-size: 13px;
+  line-height: 27px;
+}
+
+.logo img {
+  width: 3em;
+}
+
+.filter input {
+  width: 45em;
+  height: 2.875em;
+  border-radius: 8px;
+  background-color: #f1f3f4;
+  border-style: none;
+}

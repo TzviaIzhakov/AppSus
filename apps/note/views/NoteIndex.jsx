@@ -2,6 +2,7 @@ import { noteService } from '../services/note.service.js';
 import { NoteList } from '../cmps/NoteList.jsx';
 import { NoteDetails } from '../views/NoteDetails.jsx';
 import { NoteAdd } from '../cmps/NoteAdd.jsx';
+import { NoteHeader } from '../cmps/NoteHeader.jsx';
 // const { Outlet, Link } = ReactRouterDOM;
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 const { useState, useEffect } = React;
@@ -37,20 +38,6 @@ export function NoteIndex() {
       prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
     );
   };
-  // function saveNote(noteToEdit) {
-  //   noteService
-  //     .update(noteToEdit)
-  //     .then((savedNote) => {
-  //       // [...prevNotes, savedNote]
-  //       setNotes((prevNotes) => [...prevNotes, savedNote]);
-  //       console.log(`Note Edited! ${savedNote.id}`);
-  //       // showSuccessMsg(`Note Edited! ${savedBook.id}`);
-  //     })
-  //     .catch((err) => {
-  //       console.log('err:', err);
-  //       // showErrorMsg('Problem Editing' + bookToEdit.id);
-  //     });
-  // }
   function onRemoveNote(noteId) {
     noteService
       .remove(noteId)
@@ -72,6 +59,7 @@ export function NoteIndex() {
 
   return (
     <section className="note-index">
+      <NoteHeader />
       <React.Fragment>
         <NoteAdd saveNote={saveNote}></NoteAdd>
         <NoteList
