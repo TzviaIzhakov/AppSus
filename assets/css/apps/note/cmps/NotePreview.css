@@ -1,0 +1,22 @@
+.note-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  break-inside: avoid;
+  background-color: aqua;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 1rem;
+  width: 14.875em;
+}
+
+.note-preview:hover .user-tools-btns {
+  /* display: block; */
+  display: flex;
+  justify-content: space-between;
+}
+.delete-img,
+.update-img {
+  width: 1.1em;
+}

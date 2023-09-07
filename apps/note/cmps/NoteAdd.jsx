@@ -68,13 +68,13 @@ export function NoteAdd({ saveNote }) {
           name={`${currComp}`}
         />
         <button onClick={(ev) => onSetInputType('file', ev)} name="url">
-          Image
+          <img src="assets/icons-notes/img-icon.svg" alt="" />
         </button>
         <button onClick={(ev) => onSetInputType('text', ev)} name="todos">
-          To Do
+          <img src="assets/icons-notes/checkbox.svg" alt="" />
         </button>
         <button onClick={(ev) => onSetInputType('text', ev)} name="txt">
-          Text
+          <img src="assets/icons-notes/text-field.svg" alt="" />
         </button>
       </section>
       <button>Add</button>
