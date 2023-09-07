@@ -70,6 +70,7 @@ function save(note) {
 
 function getEmptyNote(currCopm) {
   //right now it giving me the defualt note as type: txt
+  console.log(currCopm);
   if (currCopm === 'txt') {
     return {
       id: '',
