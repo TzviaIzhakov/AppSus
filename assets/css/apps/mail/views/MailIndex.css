@@ -6,7 +6,7 @@
 }
 
 .read {
-  background-color: rgb(201, 239, 255);
+  background-color: var(--main-bg-color);
 }
 .emails-table tr{
    border-bottom: 1px solid gray;
