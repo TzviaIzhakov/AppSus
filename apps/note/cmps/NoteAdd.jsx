@@ -104,11 +104,3 @@ export function NoteAdd({ saveNote }) {
     </form>
   );
 }
-
-// if (field === 'amount') {
-//   const listPrice = {
-//     ...bookToEdit.listPrice,
-//     [field]: value,
-//   };
-//   setBookToEdit((prevBookToEdit) => ({ ...prevBookToEdit, listPrice }));
-// } else {

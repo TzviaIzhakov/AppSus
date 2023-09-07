@@ -13,13 +13,16 @@ export function NoteDetails({ noteId, onBack, updateNoteInList }) {
 
   if (!note) return <div>loading...</div>;
   return (
-    <section className="modal">
-      <DynamicCmp
-        type={note.type}
-        info={note.info}
-        selected={`${note.id}`}
-        updateNoteInList={updateNoteInList}
-      />
+    <section>
+      <section className="modal">
+        <DynamicCmp
+          type={note.type}
+          info={note.info}
+          selected={`${note.id}`}
+          updateNoteInList={updateNoteInList}
+        />
+      </section>
+      <section className="overlay" onClick={onBack}></section>
     </section>
   );
 }
