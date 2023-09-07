@@ -1,0 +1,42 @@
+.color-pallete-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  position: absolute;
+  bottom: -50px; /* Adjust this value as needed */
+  left: 0;
+  z-index: 1;
+  background-color: white; /* Add a background color for contrast */
+  padding: 5px; /* Add padding for better spacing */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 5px;
+}
+
+.btn-pallete {
+  display: block;
+  border-radius: 50%;
+  border-style: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  padding: 24px;
+}
+.first {
+  background-color: #f8bbd0;
+}
+
+.second {
+  background-color: #ffccbc;
+}
+
+.third {
+  background-color: #f0f4c3;
+}
+
+.fourth {
+  background-color: #1de9b6;
+}
+
+.btn-pallete:hover {
+  border: 1px solid black;
+}

@@ -50,22 +50,32 @@ export function NoteAdd({ saveNote }) {
       default:
         break;
     }
-
-    const info = {
-      ...noteToEdit.info,
-      [field]: value,
-    };
+    let info;
+    if (field === 'todos') {
+      info = {
+        ...noteToEdit.info,
+        [field]: value.split(','),
+      };
+    } else {
+      info = {
+        ...noteToEdit.info,
+        [field]: value,
+      };
+    }
 
     console.log(info, 'info');
-    console.log('some');
     setNoteToEdit((prevNoteToEdit) => ({
       ...prevNoteToEdit,
       info,
     }));
+    console.log(noteToEdit);
   }
 
   function onSaveNote(ev) {
     ev.preventDefault();
+    // if(typeInput==='todos') {
+    //   setNoteToEdit(prevNoteToEdit=>)
+    // }
     saveNote(noteToEdit);
   }
 

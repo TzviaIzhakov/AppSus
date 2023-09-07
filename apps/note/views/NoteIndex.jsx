@@ -2,6 +2,7 @@ import { noteService } from '../services/note.service.js';
 import { NoteList } from '../cmps/NoteList.jsx';
 import { NoteDetails } from '../views/NoteDetails.jsx';
 import { NoteAdd } from '../cmps/NoteAdd.jsx';
+import { NotePallete } from '../cmps/NotePallete.jsx';
 import { NoteHeader } from '../cmps/NoteHeader.jsx';
 // const { Outlet, Link } = ReactRouterDOM;
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
@@ -61,6 +62,7 @@ export function NoteIndex() {
   return (
     <section className="note-index">
       <NoteHeader />
+      {/* <NotePallete /> */}
       <React.Fragment>
         <NoteAdd saveNote={saveNote}></NoteAdd>
         <NoteList

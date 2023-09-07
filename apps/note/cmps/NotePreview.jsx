@@ -1,19 +1,19 @@
+const { useState, useEffect } = React;
 import { NoteImg } from '../cmps/NoteImg.jsx';
 import { NoteTodos } from '../cmps/NoteTodos.jsx';
 import { NoteTxt } from '../cmps/NoteTxt.jsx';
+import { NotePallete } from './NotePallete.jsx';
 
 export function NotePreview({ note, onRemoveNote, onSelectNoteId }) {
+  const [isShowPallete, setShowPallete] = useState(false);
+
+  function onShowPallate() {
+    setShowPallete((prevIsShowPallete) => !prevIsShowPallete);
+  }
   return (
     <section className="note-preview">
       <div key={note.id}>
-        <DynamicCmp
-          type={note.type}
-          info={note.info}
-          // val={answersMap[cmp.id] || ''}
-          // onChangeVal={(val) => {
-          //   onChangeVal(cmp.id, val);
-          // }}
-        />
+        <DynamicCmp type={note.type} info={note.info} />
         <section className="user-tools-btns">
           <button onClick={() => onRemoveNote(note.id)}>
             <img
@@ -29,7 +29,17 @@ export function NotePreview({ note, onRemoveNote, onSelectNoteId }) {
               className="update-img"
             />
           </button>
+          <button onClick={() => onShowPallate()}>
+            <img
+              src="assets/icons-notes/pallete-2-outline.svg"
+              alt=""
+              className="palette-img"
+            />
+          </button>
         </section>
+      </div>
+      <div className="color-palette-container">
+        {isShowPallete && <NotePallete />}
       </div>
     </section>
   );
