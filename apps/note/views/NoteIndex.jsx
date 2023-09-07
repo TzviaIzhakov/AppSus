@@ -31,7 +31,20 @@ export function NoteIndex() {
         // showErrorMsg('Problem Editing' + bookToEdit.id);
       });
   }
-
+  // function saveNote(noteToEdit) {
+  //   noteService
+  //     .update(noteToEdit)
+  //     .then((savedNote) => {
+  //       // [...prevNotes, savedNote]
+  //       setNotes((prevNotes) => [...prevNotes, savedNote]);
+  //       console.log(`Note Edited! ${savedNote.id}`);
+  //       // showSuccessMsg(`Note Edited! ${savedBook.id}`);
+  //     })
+  //     .catch((err) => {
+  //       console.log('err:', err);
+  //       // showErrorMsg('Problem Editing' + bookToEdit.id);
+  //     });
+  // }
   function onRemoveNote(noteId) {
     noteService
       .remove(noteId)
@@ -65,6 +78,7 @@ export function NoteIndex() {
         <NoteDetails
           onBack={() => onSelectNoteId(null)}
           noteId={selectedNoteId}
+          saveNote={saveNote}
         />
       )}
     </section>

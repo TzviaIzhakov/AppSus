@@ -12,6 +12,7 @@ export const noteService = {
   save,
   getEmptyNote,
   getNextNoteId,
+  update,
   // getFilterBy,
   // getDefaultFilter,
   // setFilterBy,
@@ -66,6 +67,10 @@ function save(note) {
   } else {
     return storageService.post(NOTE_KEY, note);
   }
+}
+
+function update(note) {
+  return storageService.put(NOTE_KEY, note);
 }
 
 function getEmptyNote(currCopm) {
