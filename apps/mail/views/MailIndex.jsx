@@ -4,7 +4,7 @@ import { MailList } from "../cmps/MailList.jsx"
 import { mailService } from "../services/mail.service.js"
 
 
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { Outlet, useNavigate, Link } = ReactRouterDOM
 const { useState, useEffect } = React
 
 
@@ -36,6 +36,7 @@ export function MailIndex() {
             })
     }
 function changeSent(state){
+    if(sent===state)return
     setSent(state)
     setEmails(null)
 }
@@ -56,6 +57,9 @@ function changeSent(state){
             <button>{<Link to="/mail/compose">compsoe</Link>}</button>
             <button onClick={()=>changeSent(true)}>Sent</button>
             <button onClick={()=>changeSent(false)}>Inbox</button>
+            <section>
+                <Outlet />
+            </section>
         </section>)
 }
 

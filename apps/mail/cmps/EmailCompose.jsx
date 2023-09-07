@@ -12,6 +12,9 @@ export function EmailCompose() {
 
     setEmailTosend(prevEmail => ({ ...prevEmail, [field]: value }))
   }
+  function closeModal(){
+    navigate('/mail/')
+  }
 
 
   function sendEmail(ev) {
@@ -21,15 +24,17 @@ export function EmailCompose() {
   }
   const { subject, body, to } = emailTosend
   return (<section className="compsoe-modal">
-    <div className="flex space-between"><span>new message</span> <span>x</span></div>
-    <form onSubmit={sendEmail}>
+    <div className="flex space-between modal-header"><span>new message</span> <button onClick={closeModal}>x</button></div>
+    <form className="compose-form" onSubmit={sendEmail}>
       <label htmlFor="to"></label>
       <input value={to} onChange={handleChange} placeholder="To" type="email" name="to" id="to" />
       <label htmlFor="subject"></label>
       <input value={subject} onChange={handleChange} placeholder="Subject" type="text" name="subject" id="subject" />
       <label htmlFor="body"></label>
       <textarea value={body} onChange={handleChange} type="text" name="body" id="body" />
-      <button>Send</button>
+      <section className="modal-footer">
+        <button>Send</button>
+      </section>
     </form>
   </section>
   )

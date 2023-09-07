@@ -78,6 +78,10 @@ function getEmails(filterBy = {}) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
     }
+    if(filterBy.isRead){
+    emails= emails.filter(email=> email.isRead===true)
+
+    }
   
     return emails;
   });
@@ -120,7 +124,7 @@ function getEmptyEmail(){
   
     subject: '',
     body: '',
-    sentAt: 1551133930594,
+    sentAt: Date.now(),
     from: 'user@appsus.com',
     to: '',
   }

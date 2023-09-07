@@ -22,6 +22,7 @@
 @import './apps/mail/cmps/EmailPreview.css';
 @import './apps/mail/cmps/EmailFilter.css';
 @import './apps/mail/cmps/EmailHeader.css';
+@import './apps/mail/cmps/EmailCompose.css';
 
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';

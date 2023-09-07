@@ -1,3 +1,55 @@
-.compsoe-modal{
-    
+.compsoe-modal {
+    display: grid;
+
+    height: 50vh;
+    width: 50vw;
+    grid-template-rows: 5vh 1fr;
+    border: 1px lightgray solid;
+    position: fixed;
+    bottom: 0;
+    right: 10vw;
+}
+
+.modal-header {
+    background-color: var(--main-bg-color);
+    align-items: center;
+    padding: 10px;
+}
+
+.modal-header button {
+    background-color: var(--main-bg-color);
+    border: none;
+    cursor: pointer;
+}
+.modal-header button:hover{
+    background-color: #b4bfd4;
+}
+
+.compose-form {
+    display: grid;
+    grid-template-rows: 0 5vh 0 5vh 0 1fr 5vh;
+
+}
+
+.compose-form input,
+textarea {
+    border: none;
+    border-bottom: 1px lightgray solid;
+}
+
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    /* width: 50vw; */
+}
+
+.compose-form button {
+    width: 15%;
+    height: 80%;
+    background-color: #0b57d0;
+    color: white;
+    border-radius: 555px;
+    margin-inline-start: 5px;
+
 }
