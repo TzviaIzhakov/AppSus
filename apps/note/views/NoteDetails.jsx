@@ -4,7 +4,7 @@ import { NoteTodos } from '../cmps/NoteTodos.jsx';
 import { NoteTxt } from '../cmps/NoteTxt.jsx';
 import { noteService } from '../services/note.service.js';
 
-export function NoteDetails({ noteId, onBack, saveNote }) {
+export function NoteDetails({ noteId, onBack, updateNoteInList }) {
   const [note, setNote] = useState(null);
 
   useEffect(() => {
@@ -12,23 +12,13 @@ export function NoteDetails({ noteId, onBack, saveNote }) {
   }, [noteId]);
 
   if (!note) return <div>loading...</div>;
-  // const onUpdateNote = (updatedNote) => {
-  //   // Save the updated note to the database
-  //   noteService
-  //     .update(updatedNote)
-  //     .then((savedNote) => {
-  //       // Update the note in the state with the saved version
-  //       setNote(savedNote);
-  //     })
-  // };
   return (
     <section className="modal">
       <DynamicCmp
         type={note.type}
         info={note.info}
         selected={`${note.id}`}
-        // onUpdateNote={onUpdateNote}
-        saveNote={saveNote}
+        updateNoteInList={updateNoteInList}
       />
     </section>
   );

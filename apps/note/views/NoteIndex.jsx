@@ -31,6 +31,12 @@ export function NoteIndex() {
         // showErrorMsg('Problem Editing' + bookToEdit.id);
       });
   }
+  const updateNoteInList = (updatedNote) => {
+    // Update the notes list with the updated note
+    setNotes((prevNotes) =>
+      prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
+    );
+  };
   // function saveNote(noteToEdit) {
   //   noteService
   //     .update(noteToEdit)
@@ -78,7 +84,8 @@ export function NoteIndex() {
         <NoteDetails
           onBack={() => onSelectNoteId(null)}
           noteId={selectedNoteId}
-          saveNote={saveNote}
+          // saveNote={saveNote}
+          updateNoteInList={updateNoteInList}
         />
       )}
     </section>

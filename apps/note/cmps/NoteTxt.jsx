@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 import { noteService } from '../services/note.service.js';
-export function NoteTxt({ info, selected = '', saveNote, onUpdateNote }) {
+export function NoteTxt({ info, selected = '', updateNoteInList }) {
   const [noteToEdit, setNoteToEdit] = useState(null);
 
   useEffect(() => {
@@ -42,27 +42,23 @@ export function NoteTxt({ info, selected = '', saveNote, onUpdateNote }) {
       info,
     }));
     console.log(noteToEdit);
-    // const updatedInfo = {
-    //   ...noteToEdit.info,
-    //   [field]: value,
-    // };
-
-    // const updatedNote = {
-    //   ...noteToEdit,
-    //   info: updatedInfo,
-    // };
-
-    // setNoteToEdit(updatedNote);
   }
 
   function onSaveNote(ev) {
     ev.preventDefault();
-    saveNote(noteToEdit);
+    noteService
+      .save(noteToEdit)
+      .then((savedNote) => {
+        // navigate('/book');
+        updateNoteInList(savedNote);
+        console.log(`Note Edited! ${savedNote.id}`);
+        // showSuccessMsg(`Book Edited! ${savedBook.id}`);
+      })
+      .catch((err) => {
+        console.log('err:', err);
+        // showErrorMsg('Problem Editing' + bookToEdit.id);
+      });
   }
-  // function onSaveNoteChanges(ev) {
-  //   ev.preventDefault();
-  //   onUpdateNote(noteToEdit); // Save the updated note
-  // }
 
   function getTxt() {
     let txt;
