@@ -4,19 +4,25 @@ import { MailList } from "../cmps/MailList.jsx"
 import { mailService } from "../services/mail.service.js"
 
 
-const { Outlet, useNavigate, Link } = ReactRouterDOM
+const { useNavigate,Outlet, useSearchParams, Link } = ReactRouterDOM
 const { useState, useEffect } = React
 
 
-export function MailIndex() {
+export function MailIndex({sent=false}) {
     const [emails, setEmails] = useState()
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-    const [sent,setSent] = useState(false)
+    // const [sent,setSent] = useState()
+    const navigate =useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
+    // let [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
+        setSearchParams({sent:sent})
+        console.log(sent);
         if (!sent) {
             mailService.getEmails(filterBy)
                 .then(setEmails)
+                
         }
         if (sent) {
             mailService.getSentEmails(filterBy)
@@ -37,8 +43,10 @@ export function MailIndex() {
     }
 function changeSent(state){
     if(sent===state)return
-    setSent(state)
     setEmails(null)
+    if(!sent)navigate('/mail/sent')
+    else navigate('/mail/')
+    sent=state
 }
 
     if (!emails) return <div>loading...</div>
