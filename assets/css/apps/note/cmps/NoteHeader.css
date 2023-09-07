@@ -11,8 +11,10 @@
 }
 
 .logo span {
-  font-size: 13px;
-  line-height: 27px;
+  font-size: 20px;
+  line-height: 40px;
+  font-family: sans-regular;
+  color: #5f6368;
 }
 
 .logo img {

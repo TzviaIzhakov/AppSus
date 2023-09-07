@@ -14,17 +14,17 @@ export function NotePreview({ note, onRemoveNote, onSelectNoteId }) {
           //   onChangeVal(cmp.id, val);
           // }}
         />
-        <section className="user-tools-btns hidden">
+        <section className="user-tools-btns">
           <button onClick={() => onRemoveNote(note.id)}>
             <img
-              src="assets/icons-notes/delete.svg"
+              src="assets/icons-notes/trash.svg"
               alt=""
               className="delete-img"
             />
           </button>
           <button onClick={() => onSelectNoteId(note.id)}>
             <img
-              src="assets/icons-notes/edit.svg"
+              src="assets/icons-notes/edit-line.svg"
               alt=""
               className="update-img"
             />

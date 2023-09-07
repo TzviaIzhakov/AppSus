@@ -77,9 +77,6 @@ export function NoteAdd({ saveNote }) {
 
   return (
     <form onSubmit={onSaveNote} className="user-text-area">
-      <label htmlFor="" id="txt">
-        Add Note Please
-      </label>
       <section className="input-wrapper">
         <input
           className="input-user"
@@ -87,17 +84,18 @@ export function NoteAdd({ saveNote }) {
           onChange={handleChange}
           name={`${currComp}`}
           accept="image/*"
+          placeholder="Take a note..."
         />
 
         <div className="btns-user-wrapper">
           <button onClick={(ev) => onSetInputType('file', ev)} name="url">
-            <img src="assets/icons-notes/img-icon.svg" alt="" name="url" />
+            <img src="assets/icons-notes/image-outline.svg" alt="" name="url" />
           </button>
           <button onClick={(ev) => onSetInputType('text', ev)} name="todos">
             <img src="assets/icons-notes/checkbox.svg" alt="" name="todos" />
           </button>
           <button onClick={(ev) => onSetInputType('text', ev)} name="txt">
-            <img src="assets/icons-notes/text-field.svg" alt="" name="txt" />
+            <img src="assets/icons-notes/text.svg" alt="" name="txt" />
           </button>
         </div>
       </section>

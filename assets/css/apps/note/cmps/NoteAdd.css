@@ -19,10 +19,21 @@
   width: 2.1em;
 }
 
+.btns-user-wrapper button:hover {
+  background-color: rgb(0, 0, 0, 7%);
+}
+
+.btns-user-wrapper button {
+  background-color: inherit;
+  border-style: none;
+  border-radius: 50%;
+}
 .input-user {
   /* height: 100em; */
   height: 2.3em;
   width: 35.9375em;
+  border-style: none;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.2);
 }
 .btn-submit {
   margin-block-start: 120px;
