@@ -8,59 +8,67 @@ const { useNavigate,Outlet, useSearchParams, Link } = ReactRouterDOM
 const { useState, useEffect } = React
 
 
-export function MailIndex({sent=false}) {
+export function MailIndex() {
     const [emails, setEmails] = useState()
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [state, setstate] = useState('inbox')
     // const [sent,setSent] = useState()
     const navigate =useNavigate()
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
     // let [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-        setSearchParams({sent:sent})
-        console.log(sent);
-        if (!sent) {
+  console.log(state);
+        
+        if (state==='inbox') {
             mailService.getEmails(filterBy)
                 .then(setEmails)
                 
         }
-        if (sent) {
+        if (state==='sent') {
             mailService.getSentEmails(filterBy)
                 .then(setEmails)
         }
-    }, [filterBy,sent])
+        if(state==='star'){
+            mailService.getStarEmails(filterBy)
+            .then(setEmails)
+        }
+
+    }, [filterBy,state])
 
     function onSetFilterBy(filterBy) {
         console.log('filterBy:', filterBy)
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
-    function onRemoveEmail(emailId) {
+    function onRemoveEmail(event,emailId) {
+        event.stopPropagation()
         mailService.remove(emailId)
             .then(() => {
                 setEmails(prevEmails => prevEmails.filter(email => email.id !== emailId))
                 // showSuccessMsg(`book Removed! ${emailId}`)
             })
     }
-function changeSent(state){
-    if(sent===state)return
-    setEmails(null)
-    if(!sent)navigate('/mail/sent')
-    else navigate('/mail/')
-    sent=state
+function changeState(stateToMod){
+    setstate(stateToMod)
+    // setEmails(null)
+    if(state==='sent')navigate('/mail/sent')
+    if(state==='inbox')navigate('/mail/')
+    // if(state==='star')navigate('/mail/star')
+    
 }
 
     if (!emails) return <div>loading...</div>
     return (
         <section>
             <header className="email-header">
-                <EmailHeader changeSent={changeSent}/>
+                <EmailHeader changeState={changeState}/>
 
                 <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             </header>
             <section className="emails-container">
             <table className="emails-table">
                 <tbody>
-                    <MailList sent={sent} emails={emails} onRemove={onRemoveEmail} />
+                    <MailList state={state} emails={emails} onRemove={onRemoveEmail} />
                 </tbody>
             </table>
             </section>
