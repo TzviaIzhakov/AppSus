@@ -21,7 +21,9 @@ export function App() {
                 <Route path="/mail" element={<MailIndex />} >
                     <Route path="compose" element={<EmailCompose />} />
                 </Route>
+                <Route path="/mail/sent" element={<MailIndex sent={true} />} />
                 <Route path="/mail/:emailId" element={<EmailDetails />} />
+                <Route path="/mail/sent/:emailId" element={<EmailDetails sent={true}/>} />
                 <Route path="/note" element={<NoteIndex />} />
             </Routes>
         </section>
