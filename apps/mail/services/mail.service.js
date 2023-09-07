@@ -10,7 +10,8 @@ export const mailService = {
   getDefaultFilter,
   getEmptyEmail,
   saveSent,
-  getSentEmails
+  getSentEmails,
+  getStarEmails
 };
 const MAILS_KEY = 'mailsDB';
 
@@ -29,16 +30,18 @@ function _createEmails() {
         removedAt: null,
         from: 'momo@momo.com',
         to: 'user@appsus.com',
+        isStar: false
       },
       {
         id: 'e102',
         subject: 'Hello!',
         body: 'Would love to See you',
         isRead: true,
-        sentAt: 1551133930210,
+        sentAt: 1551138930210,
         removedAt: null,
         from: 'momo@momo.com',
         to: 'user@appsus.com',
+        isStar: false
       },
       {
         id: 'e103',
@@ -49,9 +52,21 @@ function _createEmails() {
         removedAt: null,
         from: 'wixbookings.com',
         to: 'user@appsus.com',
+        isStar: false
       },
       {
         id: 'e104',
+        subject: 'TzviaIzhakov invited you to TzviaIzhakov/AppSus!',
+        body: utilService.makeLorem(),
+        isRead: false,
+        sentAt: 1551135030210,
+        removedAt: null,
+        from: 'TzviaIzhakov',
+        to: 'user@appsus.com',
+        isStar: false
+      },
+      {
+        id: 'e105',
         subject: 'TzviaIzhakov invited you to TzviaIzhakov/AppSus!',
         body: utilService.makeLorem(),
         isRead: false,
@@ -59,7 +74,28 @@ function _createEmails() {
         removedAt: null,
         from: 'TzviaIzhakov',
         to: 'user@appsus.com',
+        isStar: false
       },
+      {
+        id: 'e106',
+        subject: 'Your verification code',
+        body:`Hi Amir,
+
+        Here you have the one time verification code that you have requested to access your user account:
+        
+        838676
+        
+        This code expires in 5 minutes.
+        
+        If you didn't attempt this action, please contact the Barcelonista Support Office by email at oab@fcbarcelona.cat or by calling 902 1899 00.`,
+        isRead: false,
+        sentAt: 1551130030210,
+        removedAt: null,
+        from: 'FC Barcelona',
+        to: 'user@appsus.com',
+        isStar: false
+      },
+      
     ];
     utilService.saveToStorage(MAILS_KEY, emails);
   }
@@ -69,7 +105,6 @@ const loggedinUser = {
   email: 'user@appsus.com',
   fullname: 'Mahatma Appsus',
 };
-
 function getEmails(filterBy = {}) {
   return storageService.query(MAILS_KEY).then((emails) => {
     emails= emails.filter(email=> email.from!==loggedinUser.email)
@@ -97,6 +132,21 @@ function getSentEmails(filterBy = {}) {
    
     return emails;
   });
+}
+
+function getStarEmails(filterBy = {}){
+  return storageService.query(MAILS_KEY).then((emails) => {
+    emails=emails.filter(email=> email.isStar===true)
+    if (filterBy.subject) {
+      const regex = new RegExp(filterBy.subject, 'i');
+      emails = emails.filter((email) => regex.test(email.subject));
+    }
+    if(filterBy.isRead){
+    emails= emails.filter(email=> email.isRead===true)
+    }
+  
+    return emails
+})
 }
 
 function get(id) {
