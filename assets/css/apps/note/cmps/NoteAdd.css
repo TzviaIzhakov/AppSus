@@ -1,0 +1,29 @@
+.user-text-area {
+  position: relative;
+  margin-block-end: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: centert;
+  align-items: center;
+  justify-content: space-around;
+}
+.input-wrapper {
+  position: absolute;
+}
+.btns-user-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.btns-user-wrapper button img {
+  width: 2.1em;
+}
+
+.input-user {
+  /* height: 100em; */
+  height: 2.3em;
+  width: 35.9375em;
+}
+.btn-submit {
+  margin-block-start: 120px;
+}

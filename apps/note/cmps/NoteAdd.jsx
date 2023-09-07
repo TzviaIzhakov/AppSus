@@ -3,21 +3,19 @@ const { useNavigate, useParams } = ReactRouterDOM;
 import { noteService } from '../services/note.service.js';
 export function NoteAdd({ saveNote }) {
   const [typeInput, setTypeInput] = useState('text');
-  const [currComp, setCurrCopm] = useState('NoteTxt');
+  const [currComp, setCurrCopm] = useState('txt');
   const [noteToEdit, setNoteToEdit] = useState(
     noteService.getEmptyNote(currComp)
   );
-  {
-    /* <img class="gkA7Yd-HiaYvf HiaYvf-Vj7tjb" loading="lazy" tabindex="0" alt src=""></img> */
-  }
 
   useEffect(() => {
     setNoteToEdit(noteService.getEmptyNote(currComp));
     console.log(currComp);
   }, [currComp]);
 
-  function handleChange({ target }) {
-    const field = target.name;
+  function handleChange(ev) {
+    let { target } = ev;
+    let field = target.name;
     let value = target.value;
 
     switch (target.type) {
@@ -30,6 +28,25 @@ export function NoteAdd({ saveNote }) {
         value = target.checked;
         break;
 
+      case 'file':
+        const selectedFile = ev.target.files[0];
+        if (selectedFile) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            console.log('pp');
+            setNoteToEdit((prevNoteToEdit) => ({
+              ...prevNoteToEdit,
+              info: {
+                ...prevNoteToEdit.info,
+                url: event.target.result,
+              },
+            }));
+          };
+          reader.readAsDataURL(selectedFile);
+        } else {
+          value = '';
+        }
+        break;
       default:
         break;
     }
@@ -59,25 +76,32 @@ export function NoteAdd({ saveNote }) {
   }
 
   return (
-    <form onSubmit={onSaveNote}>
-      <label htmlFor="Add Note Please" id="txt"></label>
-      <section>
+    <form onSubmit={onSaveNote} className="user-text-area">
+      <label htmlFor="" id="txt">
+        Add Note Please
+      </label>
+      <section className="input-wrapper">
         <input
+          className="input-user"
           type={`${typeInput}`}
           onChange={handleChange}
           name={`${currComp}`}
+          accept="image/*"
         />
-        <button onClick={(ev) => onSetInputType('file', ev)} name="url">
-          <img src="assets/icons-notes/img-icon.svg" alt="" />
-        </button>
-        <button onClick={(ev) => onSetInputType('text', ev)} name="todos">
-          <img src="assets/icons-notes/checkbox.svg" alt="" />
-        </button>
-        <button onClick={(ev) => onSetInputType('text', ev)} name="txt">
-          <img src="assets/icons-notes/text-field.svg" alt="" />
-        </button>
+
+        <div className="btns-user-wrapper">
+          <button onClick={(ev) => onSetInputType('file', ev)} name="url">
+            <img src="assets/icons-notes/img-icon.svg" alt="" name="url" />
+          </button>
+          <button onClick={(ev) => onSetInputType('text', ev)} name="todos">
+            <img src="assets/icons-notes/checkbox.svg" alt="" name="todos" />
+          </button>
+          <button onClick={(ev) => onSetInputType('text', ev)} name="txt">
+            <img src="assets/icons-notes/text-field.svg" alt="" name="txt" />
+          </button>
+        </div>
       </section>
-      <button>Add</button>
+      <button className="btn-submit">Add</button>
     </form>
   );
 }
