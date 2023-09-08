@@ -9,17 +9,20 @@ const { useState, useEffect } = React
 
 
 export function MailIndex() {
-    const [emails, setEmails] = useState()
+    const [emails, setEmails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [state, setstate] = useState('inbox')
     const navigate = useNavigate()
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const mail = searchParams.has('sent')
+    // const [searchParams, setSearchParams] = useSearchParams();
+    const currentPath = window.location.hash;
+    const pathSegments = currentPath.split('/');
+    const lastSegment = pathSegments[pathSegments.length - 1];
+    // const mail = searchParams.has('sent')
 
     useEffect(() => {
-        console.log(state);
-        console.log(mail, 'mail');
+        
+        setstate(lastSegment)
+        console.log(lastSegment, 'currentPath');
         if (state === 'inbox') {
             mailService.getEmails(filterBy)
                 .then(setEmails)
@@ -34,7 +37,7 @@ export function MailIndex() {
                 .then(setEmails)
         }
 
-    }, [filterBy, state])
+    }, [filterBy, state, lastSegment])
 
     function onSetFilterBy(filterBy) {
         console.log('filterBy:', filterBy)
@@ -48,14 +51,7 @@ export function MailIndex() {
                 // showSuccessMsg(`book Removed! ${emailId}`)
             })
     }
-    function changeState(stateToMod) {
-        setstate(stateToMod)
-        // setEmails(null)
-        if (state === 'sent') navigate('/mail/sent')
-        if (state === 'inbox') navigate('/mail/')
-        // if(state==='star')navigate('/mail/star')
 
-    }
     function onChangeStar(ev, emailId) {
         ev.stopPropagation()
         console.log('ev', ev);
@@ -66,9 +62,9 @@ export function MailIndex() {
 
     if (!emails) return <div>loading...</div>
     return (
-        <section>
+        <section className="main-container">
             <header className="email-header">
-                <EmailHeader changeState={changeState} />
+                <EmailHeader setEmails={setEmails}/>
 
                 <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             </header>

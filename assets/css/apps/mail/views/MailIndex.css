@@ -1,4 +1,11 @@
 /* mail index  */
+.main-container{
+  height: 100vh;
+  background-color: #f6f8fc;
+}
+
+
+
 .emails-container {
   width: 80vw;
   margin: auto;

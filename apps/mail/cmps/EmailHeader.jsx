@@ -3,7 +3,7 @@ const { useState, useEffect } = React
 
 
 
-export function EmailHeader({ changeState }) {
+export function EmailHeader({ setEmails }) {
 const [isOpen,setIsOpen]= useState(true)
 const [dynClass,setDynClass] =useState("icon-text")
 
@@ -24,9 +24,9 @@ function toggleMenu(){
                 <h2> GMAIL</h2>
                 <ul className="side-bar list-clean">
                     <li className="compose">{<Link to="/mail/compose"><img src="./assets/icons-notes/edit-outline.svg" alt="" /></Link>} <span className={dynClass}>Compsoe</span></li>
-                    <li onClick={() => changeState('sent')}><img src="./assets/icons-notes/send-outline.svg" alt="" /> <span className={dynClass}>Sent</span></li>
-                    <li onClick={() => changeState('inbox')}><img src="./assets/icons-notes/inbox.svg" alt="" /> <span className={dynClass}>Inbox</span></li>
-                    <li onClick={() => changeState('star')}><i className="fa-regular fa-star"></i><span className={dynClass}>Starred</span></li>
+                    <li onClick={()=>setEmails(null)}> <Link to="/mail/sent"><img src="./assets/icons-notes/send-outline.svg" alt="" /> <span className={dynClass}>Sent</span></Link></li>
+                    <li onClick={()=>setEmails(null)}> <Link to="/mail/inbox"><img src="./assets/icons-notes/inbox.svg" alt="" /> <span className={dynClass}>Inbox</span></Link></li>
+                    <li onClick={()=>setEmails(null)}><Link to="/mail/star"><i className="fa-regular fa-star"></i><span className={dynClass}>Starred</span></Link></li>
                 </ul>
             </section>
         </React.Fragment>

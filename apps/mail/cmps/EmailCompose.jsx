@@ -13,14 +13,14 @@ export function EmailCompose() {
     setEmailTosend(prevEmail => ({ ...prevEmail, [field]: value }))
   }
   function closeModal(){
-    navigate('/mail/')
+    navigate(-1)
   }
 
 
   function sendEmail(ev) {
     ev.preventDefault()
     mailService.saveSent(emailTosend)
-      .then(navigate('/mail/'))
+      .then(navigate(-1))
   }
   const { subject, body, to } = emailTosend
   return (<section className="compsoe-modal">
