@@ -1,12 +1,11 @@
 /* mail index  */
-.emails-container{
+.emails-container {
   width: 80vw;
   margin: auto;
   border-radius: 15px;
   background-color: white;
   padding: 10px;
 }
-
 
 .emails-table {
   margin: auto;
@@ -17,19 +16,19 @@
 .read {
   background-color: #f2f6fc;
 }
-.emails-table tr{
-   border-bottom: 1px solid gray;
+.emails-table tr {
+  border-bottom: 1px solid gray;
 }
-.emails-table .remove{
-   display: grid;
-   justify-items: center;
-   align-items: center;
+.emails-table .remove {
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
 .emails-table tr:hover {
   border: 1px solid gray;
-  box-shadow: 5px 3px 5px #888888;
-  transition: 0.1s;
+  box-shadow: 0px 0px 3px #888888;
+  /* transition: 0.1s; */
 }
 
 .emails-table .email-body {

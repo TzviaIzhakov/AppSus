@@ -20,11 +20,3 @@
 .logo img {
   width: 3em;
 }
-
-.filter input {
-  width: 45em;
-  height: 2.875em;
-  border-radius: 8px;
-  background-color: #f1f3f4;
-  border-style: none;
-}

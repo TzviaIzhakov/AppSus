@@ -1,7 +1,12 @@
 import { NotePreview } from '../cmps/NotePreview.jsx';
 import { NotePallete } from './NotePallete.jsx';
 
-export function NoteList({ notes, onRemoveNote, onSelectNoteId }) {
+export function NoteList({
+  notes,
+  onRemoveNote,
+  onSelectNoteId,
+  updateNoteInList,
+}) {
   return (
     <ul className="notes-list clean-list">
       {notes.map((note) => {
@@ -12,6 +17,7 @@ export function NoteList({ notes, onRemoveNote, onSelectNoteId }) {
                 note={note}
                 onRemoveNote={onRemoveNote}
                 onSelectNoteId={onSelectNoteId}
+                updateNoteInList={updateNoteInList}
               />
             </li>
           </div>
