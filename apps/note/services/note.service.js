@@ -13,26 +13,26 @@ export const noteService = {
   getEmptyNote,
   getNextNoteId,
   update,
+  getDefaultFilter,
   // getFilterBy,
   // getDefaultFilter,
   // setFilterBy,
 };
 
-// filterBy = {}
-function query() {
+function query(filterBy) {
+  console.log(filterBy);
   return storageService.query(NOTE_KEY).then((notes) => {
-    // if (filterBy.title) {
-    //   const regex = new RegExp(filterBy.title, 'i');
-    //   notes = notes.filter((note) => regex.test(note.title));
-    // }
-    // if (filterBy.minAmount) {
-    //   notes = notes.filter(
-    //     (note) => note.listPrice.amount >= filterBy.minAmount
-    //   );
-    // }
-    // if (filterBy.minPageCount) {
-    //   notes = notes.filter((note) => note.pageCount >= filterBy.minPageCount);
-    // }
+    if (filterBy.txt) {
+      const regex = new RegExp(filterBy.txt, 'i');
+      let notesCopy = notes.slice();
+      notes = notes.filter((note) => regex.test(note.info.txt));
+      if (notes.length === 0) {
+        console.log('pp');
+        const regex = new RegExp(filterBy.txt, 'i');
+        notes = notesCopy.filter((note) => regex.test(note.info.title));
+      }
+    }
+    console.log(notes, 'notes');
     return notes;
   });
 }
@@ -175,16 +175,17 @@ function _createNotes() {
 }
 
 function _createNote() {}
-// function getFilterBy() {
-//   return { ...gFilterBy };
-// }
 
-// function setFilterBy(filterBy = {}) {
-//   if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt;
-//   if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed;
-//   return gFilterBy;
-// }
+function getFilterBy() {
+  return { ...gFilterBy };
+}
 
-// function getDefaultFilter() {
-//     return { title: '', minAmount: '', minPageCount: '' };
-//   }
+function setFilterBy(filterBy = {}) {
+  if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt;
+  // if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed;
+  return gFilterBy;
+}
+
+function getDefaultFilter() {
+  return { txt: '', title: '' };
+}

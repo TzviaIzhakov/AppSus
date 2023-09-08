@@ -2,8 +2,8 @@ import { noteService } from '../services/note.service.js';
 import { NoteList } from '../cmps/NoteList.jsx';
 import { NoteDetails } from '../views/NoteDetails.jsx';
 import { NoteAdd } from '../cmps/NoteAdd.jsx';
-import { NotePallete } from '../cmps/NotePallete.jsx';
 import { NoteHeader } from '../cmps/NoteHeader.jsx';
+import { NoteFilter } from '../cmps/NoteFilter.jsx';
 // const { Outlet, Link } = ReactRouterDOM;
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 const { useState, useEffect } = React;
@@ -11,14 +11,21 @@ const { useState, useEffect } = React;
 export function NoteIndex() {
   const [notes, setNotes] = useState(null);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
+  const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter());
 
   useEffect(() => {
     console.log('mount');
-    noteService.query().then((notes) => {
+    console.log(filterBy);
+    noteService.query(filterBy).then((notes) => {
       console.log(notes);
       setNotes(notes);
     });
-  }, []);
+  }, [filterBy]);
+
+  function onSetFilterBy(filterBy) {
+    console.log(filterBy);
+    setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }));
+  }
 
   function saveNote(noteToEdit) {
     noteService
@@ -61,14 +68,15 @@ export function NoteIndex() {
 
   return (
     <section className="note-index">
-      <NoteHeader />
-      {/* <NotePallete /> */}
+      <NoteHeader filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+
       <React.Fragment>
         <NoteAdd saveNote={saveNote}></NoteAdd>
         <NoteList
           notes={notes}
           onRemoveNote={onRemoveNote}
           onSelectNoteId={onSelectNoteId}
+          updateNoteInList={updateNoteInList}
         ></NoteList>
       </React.Fragment>
       {selectedNoteId && (

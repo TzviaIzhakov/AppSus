@@ -3,13 +3,19 @@
   flex-direction: row;
   gap: 20px;
   position: absolute;
-  bottom: -50px; /* Adjust this value as needed */
-  left: 0;
-  z-index: 1;
-  background-color: white; /* Add a background color for contrast */
-  padding: 5px; /* Add padding for better spacing */
-  border: 1px solid #ccc; /* Add a border for separation */
+  bottom: -64px;
+  /* right: 0; */
+  left: -21px;
+  /* z-index: 1; */
+  background-color: white;
+  padding: 5px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  transition: opacity 0.218s linear;
+}
+
+.color-palette-container {
+  position: relative;
 }
 
 .btn-pallete {

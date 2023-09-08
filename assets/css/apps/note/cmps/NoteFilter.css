@@ -1,0 +1,19 @@
+.filter input {
+  width: 45em;
+  height: 2.875em;
+  border-radius: 8px;
+  background-color: #f1f3f4;
+  border-style: none;
+  padding: 0 50px;
+}
+.filter {
+  position: relative;
+}
+.search-icon-container {
+  position: absolute;
+  top: 2px;
+  padding: 3px;
+}
+.search-icon-container img {
+  width: 2em;
+}
