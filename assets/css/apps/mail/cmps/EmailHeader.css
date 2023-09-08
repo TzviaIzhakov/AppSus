@@ -16,10 +16,11 @@
 
 .title {
     font-size: 22px;
+    align-items: center;
 }
 
-.hamburger {
-    scale: 1.2;
+.humburger {
+    /* scale: 1.2; */
     cursor: pointer;
     margin-left: 0;
 }
@@ -88,5 +89,14 @@
     background-color: #f6f8fc;
 }
  
+.compose{
+    background-color: #c2e7ff;
+    border-radius: 10px;
+    padding: 10px;
+}
 
-
+.compose:hover{
+    background-color: #c2e7ff;
+    border-radius: 10px;
+    padding: 10px;
+}
