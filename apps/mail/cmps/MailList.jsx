@@ -2,7 +2,7 @@ import { EmailPreview } from "./EmailPreview.jsx"
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
 
-export function MailList({ emails, onRemove, sent }) {
+export function MailList({ emails, onRemove, sent, changeStar }) {
     const navigate = useNavigate()
 
     function openEmail(emailId) {
@@ -12,7 +12,7 @@ export function MailList({ emails, onRemove, sent }) {
     }
 
     return emails.map(email => <tr onClick={() => openEmail(email.id)} className={!sent && email.isRead ? 'read' : ''} key={email.id}>
-        <EmailPreview sent={sent} onRemove={onRemove} email={email} />
+        <EmailPreview changeStar={changeStar} sent={sent} onRemove={onRemove} email={email} />
     </tr>)
 }
 
