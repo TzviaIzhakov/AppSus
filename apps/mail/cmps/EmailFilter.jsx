@@ -37,7 +37,7 @@ export function EmailFilter({ filterBy, onSetFilterBy }) {
     <th className="emails-filter">
       <form onSubmit={onSubmitFilter}>
        
-        <label htmlFor="isRead"> read</label>
+        <label htmlFor="isRead"> {isRead? <img src="./assets/icons-notes/eye.svg"/>:<img src="./assets/icons-notes/eye-off-duotone.svg"/>}</label>
         <input value={isRead} onChange={handleChange} type="checkbox" id="isRead" name="isRead" />
 
       </form>

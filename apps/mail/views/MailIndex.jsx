@@ -38,6 +38,10 @@ export function MailIndex() {
             mailService.getStarEmails(filterBy, sortKey)
                 .then(setEmails)
         }
+        if (state === 'trash') {
+            mailService.getTrashEmails(filterBy, sortKey)
+                .then(setEmails)
+        }
 
     }, [filterBy, state, lastSegment, sortKey])
 
@@ -47,7 +51,7 @@ export function MailIndex() {
     }
     function onRemoveEmail(event, emailId) {
         event.stopPropagation()
-        mailService.moveToTrash(emailId)
+        mailService.remove(emailId)
             .then(() => {
                 setEmails(prevEmails => prevEmails.filter(email => email.id !== emailId))
                 // showSuccessMsg(`book Removed! ${emailId}`)

@@ -34,4 +34,7 @@ background-color: #eaf1fb;
     /* pointer-events: none; Prevent the icon from blocking clicks on the input */
     /* scale: 0.15; */
   }
-
+  input[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+  }
