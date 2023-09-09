@@ -38,3 +38,4 @@
 @import './setup/typography.css';
 @import './setup/variables.css';
 @import './apps/note/setup/mq.css';
+@import './apps/mail/setup/mq.css';

@@ -18,7 +18,7 @@
     /* margin-right: 20px; */
     font-size: 22px;
     align-items: center;
-
+    font-family: sans-serif;
 }
 
 .humburger {
@@ -137,4 +137,9 @@
 .email-count {
     margin-inline-start: 30px;
     opacity: 0.6;
+}
+
+.active{
+    background-color: #d3e3fd;
+    border-radius: 555px;
 }
