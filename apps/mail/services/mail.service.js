@@ -11,7 +11,9 @@ export const mailService = {
   getEmptyEmail,
   saveSent,
   getSentEmails,
-  getStarEmails
+  getStarEmails,
+  sentEmailCount,
+  inboxEmailCount
 };
 const MAILS_KEY = 'mailsDB';
 
@@ -79,7 +81,7 @@ function _createEmails() {
       {
         id: 'e106',
         subject: 'Your verification code',
-        body:`Hi Amir,
+        body: `Hi Amir,
 
         Here you have the one time verification code that you have requested to access your user account:
         
@@ -95,7 +97,7 @@ function _createEmails() {
         to: 'user@appsus.com',
         isStar: false
       },
-      
+
     ];
     utilService.saveToStorage(MAILS_KEY, emails);
   }
@@ -107,46 +109,46 @@ const loggedinUser = {
 };
 function getEmails(filterBy = {}) {
   return storageService.query(MAILS_KEY).then((emails) => {
-    emails= emails.filter(email=> email.from!==loggedinUser.email)
+    emails = emails.filter(email => email.from !== loggedinUser.email)
     console.log(emails);
     if (filterBy.subject) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
     }
-    if(filterBy.isRead){
-    emails= emails.filter(email=> email.isRead===true)
+    if (filterBy.isRead) {
+      emails = emails.filter(email => email.isRead === true)
 
     }
-  
+
     return emails;
   });
 }
 function getSentEmails(filterBy = {}) {
   return storageService.query(MAILS_KEY).then((emails) => {
-  emails= emails.filter(email=> email.from===loggedinUser.email)
-  console.log(emails);
+    emails = emails.filter(email => email.from === loggedinUser.email)
+    console.log(emails);
     if (filterBy.subject) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
     }
-   
+
     return emails;
   });
 }
 
-function getStarEmails(filterBy = {}){
+function getStarEmails(filterBy = {}) {
   return storageService.query(MAILS_KEY).then((emails) => {
-    emails=emails.filter(email=> email.isStar===true)
+    emails = emails.filter(email => email.isStar === true)
     if (filterBy.subject) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
     }
-    if(filterBy.isRead){
-    emails= emails.filter(email=> email.isRead===true)
+    if (filterBy.isRead) {
+      emails = emails.filter(email => email.isRead === true)
     }
-  
+
     return emails
-})
+  })
 }
 
 function get(id) {
@@ -169,9 +171,9 @@ function getDefaultFilter() {
   return { subject: '', isRead: false };
 }
 
-function getEmptyEmail(){
-  return{
-  
+function getEmptyEmail() {
+  return {
+
     subject: '',
     body: '',
     sentAt: Date.now(),
@@ -181,5 +183,29 @@ function getEmptyEmail(){
 }
 
 function saveSent(email) {
-  return storageService.post(MAILS_KEY, email);
+  return storageService.post(MAILS_KEY, email)
+    .then(() => 
+      getSentEmails()
+    )
+}
+
+
+function sentEmailCount() {
+  return storageService.query(MAILS_KEY).then((emails) => {
+    emails = emails.filter(email => email.from === loggedinUser.email)
+    console.log(emails);
+    return emails.length
+
+  })
+
+}
+
+function inboxEmailCount() {
+  return storageService.query(MAILS_KEY).then((emails) => {
+    emails = emails.filter(email => email.from !== loggedinUser.email)
+    console.log(emails);
+    return emails.length
+
+  })
+
 }

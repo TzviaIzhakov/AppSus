@@ -36,7 +36,10 @@ export function EmailFilter({ filterBy, onSetFilterBy }) {
   return (
     <section className="emails-filter">
       <form onSubmit={onSubmitFilter}>
-        <input className="search-bar" value={subject} onChange={handleChange} type="text" placeholder="search" id="subject" name="subject" />
+        <div className="search-container">
+        <i className="fa-solid fa-magnifying-glass search-icon"></i>
+          <input className="search-bar" value={subject} onChange={handleChange} type="text" placeholder="search" id="subject" name="subject" />
+        </div>
         <label htmlFor="isRead"> read only</label>
         <input value={isRead} onChange={handleChange} type="checkbox" id="isRead" name="isRead" />
 

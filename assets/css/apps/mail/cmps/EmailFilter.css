@@ -11,7 +11,26 @@ height: 2rem;
 border-radius: 555px;
 width: 35rem;
 height: 40px;
-padding-left: 20px;
+padding-left: 30px;
 font-size: 1.5em;
+background-color: #eaf1fb;
+
 }
+
+.search-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+ 
+  
+  .search-icon{
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Adjust the left spacing */
+    transform: translateY(-50%);
+    color: #333; /* Icon color */
+    /* pointer-events: none; Prevent the icon from blocking clicks on the input */
+    /* scale: 0.15; */
+  }
 

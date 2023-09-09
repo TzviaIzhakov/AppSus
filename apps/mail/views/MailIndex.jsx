@@ -16,11 +16,11 @@ export function MailIndex() {
     // const [searchParams, setSearchParams] = useSearchParams();
     const currentPath = window.location.hash;
     const pathSegments = currentPath.split('/');
-    const lastSegment = pathSegments[pathSegments.length - 1];
+    const lastSegment = pathSegments[2];
     // const mail = searchParams.has('sent')
 
     useEffect(() => {
-        
+
         setstate(lastSegment)
         console.log(lastSegment, 'currentPath');
         if (state === 'inbox') {
@@ -60,11 +60,15 @@ export function MailIndex() {
             .then(em => console.log(em, 'em'))
     }
 
-    if (!emails) return <div>loading...</div>
+    if (!emails) return <header className="email-header">
+        <EmailHeader setEmails={setEmails} />
+
+        <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+    </header>
     return (
         <section className="main-container">
             <header className="email-header">
-                <EmailHeader setEmails={setEmails}/>
+                <EmailHeader state={state} setEmails={setEmails} />
 
                 <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             </header>

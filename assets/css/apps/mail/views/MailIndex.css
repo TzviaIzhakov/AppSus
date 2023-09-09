@@ -26,10 +26,12 @@
 .emails-table tr {
   border-bottom: 1px solid gray;
 }
+
 .emails-table .remove {
-  display: grid;
-  justify-items: center;
-  align-items: center;
+  display: none;
+  height: 100%;
+ /* position: absolute; */
+
 }
 
 .emails-table tr:hover {
@@ -40,8 +42,16 @@
 
 .emails-table .email-body {
   max-width: 200px;
-
+  padding: 10px;
   overflow: hidden; /* Hide overflowing content */
   white-space: nowrap; /* Prevent text from wrapping */
   text-overflow: ellipsis;
+}
+.emails-table tr:hover .remove {
+display: block;
+translate: 0 7px;
+
+/* height: 100%; */
+/* position: absolute; */
+
 }

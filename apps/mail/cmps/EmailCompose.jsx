@@ -1,11 +1,15 @@
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
+
 import { mailService } from "../services/mail.service.js"
 
 export function EmailCompose() {
   const navigate = useNavigate()
   const [emailTosend, setEmailTosend] = useState(mailService.getEmptyEmail())
+  
+  
+  
   function handleChange({ target }) {
     const field = target.name
     let value = target.value
@@ -20,9 +24,12 @@ export function EmailCompose() {
   function sendEmail(ev) {
     ev.preventDefault()
     mailService.saveSent(emailTosend)
+    .then(res=>console.log(res,'res'))
       .then(navigate(-1))
   }
+
   const { subject, body, to } = emailTosend
+
   return (<section className="compsoe-modal">
     <div className="flex space-between modal-header"><span>new message</span> <button onClick={closeModal}>x</button></div>
     <form className="compose-form" onSubmit={sendEmail}>
