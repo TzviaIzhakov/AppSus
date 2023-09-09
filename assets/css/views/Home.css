@@ -1,18 +1,17 @@
 .our-img {
   width: 10em;
-  border-radius: 555px;
+  border-radius: 50%;
 }
 
 .amir-img {
   width: 8.5em;
-  border-radius: 555px;
+  border-radius: 50%;
 }
 
 .hero {
-  background-image: url('background-image.jpg'); /* Replace with your image URL */
+  background-image: url('background-image.jpg');
   background-size: cover;
   background-position: center;
-  /* color: #fff; */
   text-align: center;
   padding: 100px 0;
   display: flex;
@@ -20,6 +19,7 @@
   justify-content: center;
   gap: 5px;
 }
+
 .horse {
   width: 4em;
 }

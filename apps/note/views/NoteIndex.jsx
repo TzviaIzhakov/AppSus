@@ -8,7 +8,7 @@ import { NoteFilter } from '../cmps/NoteFilter.jsx';
 //   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 const { useState, useEffect } = React;
 
-export function NoteIndex() {
+export function NoteIndex({ setShowMainHeader }) {
   const [notes, setNotes] = useState(null);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter());
@@ -72,7 +72,11 @@ export function NoteIndex() {
 
   return (
     <section className="note-index">
-      <NoteHeader filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+      <NoteHeader
+        filterBy={filterBy}
+        onSetFilterBy={onSetFilterBy}
+        setShowMainHeader={setShowMainHeader}
+      />
 
       <React.Fragment>
         <NoteAdd saveNote={saveNote}></NoteAdd>

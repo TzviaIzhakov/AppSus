@@ -141,7 +141,7 @@ function _createNotes() {
           backgroundColor: '#00d',
         },
         info: {
-          txt: 'Fullstack Me Baby!',
+          txt: "Dont forget Ido's birthday",
         },
       },
       {
@@ -149,25 +149,25 @@ function _createNotes() {
         type: 'NoteImg',
         isPinned: false,
         info: {
-          url: 'https://media.istockphoto.com/id/1283852667/photo/touch-of-fresh-moss-in-the-forest.jpg?s=1024x1024&w=is&k=20&c=WLVkjVoG8r68qfe2OOBqrbNqTXzjnWH9g2mrtF4-V08=',
-          title: 'Bobi and Me',
+          url: 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcRomjKJSLJf9WqOwc69Pz8KLgkXeLLP4RgRY54LIjuMWP-tVkHMQ_dfid03sEiUzEFTRQ9Kzjn6zw8HES0_YuM',
+          title: "Don't forget to water the pots",
         },
         style: {
           backgroundColor: '#00d',
         },
       },
-      {
-        id: 'n103',
-        type: 'NoteTodos',
-        isPinned: false,
-        info: {
-          title: 'Get my stuff together',
-          todos: [
-            { txt: 'Driving license', doneAt: null },
-            { txt: 'Coding power', doneAt: 187111111 },
-          ],
-        },
-      },
+      // {
+      //   id: 'n103',
+      //   type: 'NoteTodos',
+      //   isPinned: false,
+      //   info: {
+      //     title: 'Get my stuff together',
+      //     todos: [
+      //       { txt: 'Driving license', doneAt: null },
+      //       { txt: 'Coding power', doneAt: 187111111 },
+      //     ],
+      //   },
+      // },
     ];
   }
   utilService.saveToStorage(NOTE_KEY, notes);

@@ -44,7 +44,7 @@ export function NoteFilter({ onSetFilterBy, filterBy }) {
   return (
     <form onSubmit={onSubmitFilter} className="filter">
       <div className="search-icon-container">
-        <button className="search-icon">
+        <button className="search-icon-note">
           <img src="assets/icons-notes/search.svg" alt="search-icon" />
         </button>
       </div>

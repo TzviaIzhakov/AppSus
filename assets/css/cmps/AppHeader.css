@@ -1,20 +1,18 @@
 header {
-
-    background: lightcyan;
-    border-bottom: 2px solid white;
+  border-bottom: 2px solid white;
 }
 
 .app-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
 }
 
 nav a {
-    margin: .5em;
+  margin: 0.5em;
 }
 
-nav a:active {
+/* nav a:active {
     color: purple;
 }
 
@@ -22,4 +20,7 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+} */
+.mail {
+  width: 4em;
 }

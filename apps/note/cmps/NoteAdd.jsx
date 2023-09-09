@@ -122,7 +122,7 @@ export function NoteAdd({ saveNote }) {
                     name="url"
                   />
                 </button>
-                <button
+                {/* <button
                   onClick={(ev) => onSetInputType('text', ev)}
                   name="todos"
                 >
@@ -131,7 +131,7 @@ export function NoteAdd({ saveNote }) {
                     alt=""
                     name="todos"
                   />
-                </button>
+                </button> */}
                 <button
                   onClick={(ev) => onSetInputType('text', ev)}
                   name="txt"
