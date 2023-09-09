@@ -17,3 +17,11 @@
 .search-icon-container img {
   width: 2em;
 }
+.search-icon {
+  border-style: none;
+  border-radius: 50%;
+}
+.search-icon:hover {
+  background-color: rgb(0, 0, 0, 7%);
+  cursor: pointer;
+}

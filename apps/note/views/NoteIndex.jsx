@@ -84,6 +84,7 @@ export function NoteIndex() {
           onBack={() => onSelectNoteId(null)}
           noteId={selectedNoteId}
           // saveNote={saveNote}
+          onRemoveNote={onRemoveNote}
           updateNoteInList={updateNoteInList}
         />
       )}

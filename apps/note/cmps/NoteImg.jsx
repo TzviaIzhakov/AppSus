@@ -106,7 +106,6 @@ export function NoteImg({ info, selected = '', updateNoteInList }) {
     <article>
       {selected ? (
         <form onSubmit={onSaveNote}>
-          <input value={getTitle()} onChange={handleChange} name="title" />
           <img src={`${getUrl()}`} alt="img-user" className="user-img" />
           <input
             type="file"
@@ -114,7 +113,14 @@ export function NoteImg({ info, selected = '', updateNoteInList }) {
             onChange={handleChange}
             name="url"
           />
-          <button>Update Changes</button>
+          <input value={getTitle()} onChange={handleChange} name="title" />
+          <button>
+            <img
+              src="assets/icons-notes/add.svg"
+              alt=""
+              className="update-img"
+            />
+          </button>
         </form>
       ) : (
         <div>

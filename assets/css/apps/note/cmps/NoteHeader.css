@@ -1,8 +1,12 @@
 .note-header {
-  align-items: center;
+  /* align-items: center;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); */
   background-color: white;
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  margin-bottom: 1px;
 }
 .logo {
   display: flex;
