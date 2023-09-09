@@ -13,9 +13,9 @@ export function EmailPreview({ email, onRemove, state, changeStar }) {
 
   return (
     <React.Fragment>
-      <td className="star-rating" ><button className={email.isStar ? 'on' : 'off'} ><span className='star'>
+      <td className="star-rating" ><button className={email.isStar ? 'on' : 'off'} >
         <i onClick={(ev) => changeStar(ev, email.id)} className='fa-solid fa-star fa-lg'></i>
-      </span>
+      
       </button></td>
       <td>{state === 'sent' ? 'To: ' + email.to : email.from}</td>
       <td> {email.subject}</td>

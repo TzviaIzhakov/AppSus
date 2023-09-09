@@ -18,12 +18,16 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/mail" element={<MailIndex />} >
+                <Route path="/mail/:state" element={<MailIndex />} >
                     <Route path="compose" element={<EmailCompose />} />
                 </Route>
-                <Route path="/mail/sent" element={<MailIndex sent={true} />} />
-                <Route path="/mail/:emailId" element={<EmailDetails />} />
-                <Route path="/mail/sent/:emailId" element={<EmailDetails sent={true}/>} />
+                <Route path="/mail/inbox" element={<MailIndex />} />
+                <Route path="/mail/sent" element={<MailIndex />} />
+                <Route path="/mail/star" element={<MailIndex />} />
+                <Route path="/mail/inbox/:emailId" element={<EmailDetails />} />
+                <Route path="/mail/sent/:emailId" element={<EmailDetails/>} />
+                <Route path="/mail/star/:emailId" element={<EmailDetails/>} />
+              
                 <Route path="/note" element={<NoteIndex />} />
             </Routes>
         </section>

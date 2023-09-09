@@ -2,6 +2,7 @@ import { EmailFilter } from "../cmps/EmailFilter.jsx"
 import { EmailHeader } from "../cmps/EmailHeader.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { mailService } from "../services/mail.service.js"
+import { EmailsSort } from "../cmps/EmailsSorst.jsx"
 
 
 const { useNavigate, Outlet, useSearchParams, Link } = ReactRouterDOM
@@ -9,32 +10,40 @@ const { useState, useEffect } = React
 
 
 export function MailIndex() {
-    const [emails, setEmails] = useState()
+    const [emails, setEmails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [state, setstate] = useState('inbox')
+    const [sortKey, setSortKey] = useState()
     const navigate = useNavigate()
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
+    const currentPath = window.location.hash;
+    const pathSegments = currentPath.split('/');
+    const lastSegment = pathSegments[2];
 
-    const mail = searchParams.has('sent')
 
     useEffect(() => {
-        console.log(state);
-        console.log(mail, 'mail');
+
+        setstate(lastSegment)
+        console.log(sortKey, 'sortkey')
         if (state === 'inbox') {
-            mailService.getEmails(filterBy)
+            mailService.getEmails(filterBy, sortKey)
                 .then(setEmails)
 
         }
         if (state === 'sent') {
-            mailService.getSentEmails(filterBy)
+            mailService.getSentEmails(filterBy, sortKey)
                 .then(setEmails)
         }
         if (state === 'star') {
-            mailService.getStarEmails(filterBy)
+            mailService.getStarEmails(filterBy, sortKey)
+                .then(setEmails)
+        }
+        if (state === 'trash') {
+            mailService.getTrashEmails(filterBy, sortKey)
                 .then(setEmails)
         }
 
-    }, [filterBy, state])
+    }, [filterBy, state, lastSegment, sortKey])
 
     function onSetFilterBy(filterBy) {
         console.log('filterBy:', filterBy)
@@ -48,32 +57,44 @@ export function MailIndex() {
                 // showSuccessMsg(`book Removed! ${emailId}`)
             })
     }
-    function changeState(stateToMod) {
-        setstate(stateToMod)
-        // setEmails(null)
-        if (state === 'sent') navigate('/mail/sent')
-        if (state === 'inbox') navigate('/mail/')
-        // if(state==='star')navigate('/mail/star')
 
-    }
     function onChangeStar(ev, emailId) {
         ev.stopPropagation()
-        console.log('ev', ev);
+        // console.log('ev', ev);
         mailService.get(emailId)
-            .then(email => email.isStar = !email.isStar)
-            .then(em => console.log(em, 'em'))
+            .then(email => {
+                email.isStar = !email.isStar
+                mailService.save(email)
+                
+            })
+           
     }
 
-    if (!emails) return <div>loading...</div>
-    return (
-        <section>
-            <header className="email-header">
-                <EmailHeader changeState={changeState} />
+    if (!emails) return <header className="email-header">
+        <EmailHeader filterBy={filterBy} onSetFilterBy={onSetFilterBy} state={state} setEmails={setEmails} />
 
-                <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+        {/* <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} /> */}
+    </header>
+    return (
+        <section className="main-container">
+            <header className="email-header">
+                <EmailHeader filterBy={filterBy} onSetFilterBy={onSetFilterBy} state={state} setEmails={setEmails} />
+
+
             </header>
             <section className="emails-container">
                 <table className="emails-table">
+                    <thead>
+                        <tr>
+                        
+
+                                <EmailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+                            
+                            <th>
+                                <EmailsSort setSortKey={setSortKey} emails={emails} />
+                            </th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <MailList changeStar={onChangeStar} state={state} emails={emails} onRemove={onRemoveEmail} />
                     </tbody>
