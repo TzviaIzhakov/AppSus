@@ -304,6 +304,7 @@ function getTrashEmails(filterBy = {}, key) {
     if (filterBy.isRead) {
       emails = emails.filter(email => email.isRead === true)
     }
+    console.log(emails,'trash');
     sortBy(emails, key)
     return emails
   })
@@ -323,12 +324,12 @@ function save(email) {
 
 function remove(emailId) {
   return get(emailId).then(email => {
-    console.log(email.isTrash);
+    // console.log(email.isTrash);
     if (!email.isTrash) {
       email.isTrash = true
       save(email)
     }
-    if (email.isTrash) storageService.remove(MAILS_KEY, emailId);
+   else if (email.isTrash) storageService.remove(MAILS_KEY, emailId);
 
   })
 }
