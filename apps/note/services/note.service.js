@@ -142,6 +142,7 @@ function _createNotes() {
         },
         info: {
           txt: "Dont forget Ido's birthday",
+          title: "Don't forget",
         },
       },
       {
