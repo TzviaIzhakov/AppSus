@@ -32,7 +32,7 @@ export function Home() {
         </section>
       </main>
       <footer>
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; 2023 App Sus. All rights reserved.</p>
       </footer>
     </section>
   );
