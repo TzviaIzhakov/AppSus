@@ -100,7 +100,7 @@
     transition: 0.6s;
     opacity: 0;
     /* display: none; */
-    translate: -0px;
+    translate: -500px;
     width: 150px;
 }
 
@@ -129,7 +129,7 @@
 }
 
 .compose:hover {
-    background-color: #c2e7ff;
+    /* background-color: #c2e7ff; */
     border-radius: 10px;
     padding: 10px;
 }

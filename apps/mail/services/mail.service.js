@@ -1,4 +1,5 @@
 // mail service
+import { func } from 'prop-types';
 import { storageService } from '../../../services/async-storage.service.js';
 import { utilService } from '../../../services/util.service.js';
 
@@ -14,10 +15,12 @@ export const mailService = {
   getStarEmails,
   sentEmailCount,
   inboxEmailCount,
-  getTrashEmails
+  getTrashEmails,
+  saveDraft,
+  getDraft
 };
 const MAILS_KEY = 'mailsDB';
-
+const DRAFT_KEY = 'draftDB'
 
 
 _createEmails();
@@ -291,9 +294,9 @@ function getStarEmails(filterBy = {}, key) {
     return emails
   })
 }
-function getTrashEmails(filterBy = {}, key){
- return storageService.query(MAILS_KEY).then((emails) => {
-    emails = emails.filter(email => email.isTrash===true)
+function getTrashEmails(filterBy = {}, key) {
+  return storageService.query(MAILS_KEY).then((emails) => {
+    emails = emails.filter(email => email.isTrash === true)
     if (filterBy.subject) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
@@ -326,7 +329,7 @@ function remove(emailId) {
       save(email)
     }
     if (email.isTrash) storageService.remove(MAILS_KEY, emailId);
-    
+
   })
 }
 
@@ -377,3 +380,20 @@ function sortBy(emails, key, dir = 1) {
     : emails.sort((a, b) => (a[key] - b[key]) * dir)
   return emails
 }
+
+function saveDraft(email) {
+if(!email)return
+  if (email.id) {
+    return storageService.put(DRAFT_KEY, email);
+  } else {
+
+    return storageService.post(DRAFT_KEY, email);
+  }
+}
+
+function getDraft() {
+  return storageService.query(DRAFT_KEY)
+  .then(email => (email[0]))
+}
+
+// storageService.post(DRAFT_KEY, getEmptyEmail())
