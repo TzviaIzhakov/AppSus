@@ -13,9 +13,11 @@ export const mailService = {
   getSentEmails,
   getStarEmails,
   sentEmailCount,
-  inboxEmailCount
+  inboxEmailCount,
+  moveToTrash
 };
 const MAILS_KEY = 'mailsDB';
+const TRASH_KEY= 'trashDB'
 
 _createEmails();
 
@@ -30,7 +32,7 @@ function _createEmails() {
         isRead: false,
         sentAt: 1551133930594,
         removedAt: null,
-        from: 'momo@momo.com',
+        from: 'maomo@momo.com',
         to: 'user@appsus.com',
         isStar: false
       },
@@ -41,7 +43,7 @@ function _createEmails() {
         isRead: true,
         sentAt: 1551138930210,
         removedAt: null,
-        from: 'momo@momo.com',
+        from: 'bomo@momo.com',
         to: 'user@appsus.com',
         isStar: false
       },
@@ -52,7 +54,7 @@ function _createEmails() {
         isRead: false,
         sentAt: 1551130930210,
         removedAt: null,
-        from: 'wixbookings.com',
+        from: 'cixbookings.com',
         to: 'user@appsus.com',
         isStar: false
       },
@@ -63,7 +65,7 @@ function _createEmails() {
         isRead: false,
         sentAt: 1551135030210,
         removedAt: null,
-        from: 'TzviaIzhakov',
+        from: 'dzviaIzhakov',
         to: 'user@appsus.com',
         isStar: false
       },
@@ -107,7 +109,7 @@ const loggedinUser = {
   email: 'user@appsus.com',
   fullname: 'Mahatma Appsus',
 };
-function getEmails(filterBy = {}) {
+function getEmails(filterBy = {},key) {
   return storageService.query(MAILS_KEY).then((emails) => {
     emails = emails.filter(email => email.from !== loggedinUser.email)
     console.log(emails);
@@ -119,11 +121,11 @@ function getEmails(filterBy = {}) {
       emails = emails.filter(email => email.isRead === true)
 
     }
-
+    sortBy(emails,key)
     return emails;
   });
 }
-function getSentEmails(filterBy = {}) {
+function getSentEmails(filterBy = {},key) {
   return storageService.query(MAILS_KEY).then((emails) => {
     emails = emails.filter(email => email.from === loggedinUser.email)
     console.log(emails);
@@ -131,12 +133,12 @@ function getSentEmails(filterBy = {}) {
       const regex = new RegExp(filterBy.subject, 'i');
       emails = emails.filter((email) => regex.test(email.subject));
     }
-
+    sortBy(emails,key)
     return emails;
   });
 }
 
-function getStarEmails(filterBy = {}) {
+function getStarEmails(filterBy = {},key) {
   return storageService.query(MAILS_KEY).then((emails) => {
     emails = emails.filter(email => email.isStar === true)
     if (filterBy.subject) {
@@ -146,7 +148,7 @@ function getStarEmails(filterBy = {}) {
     if (filterBy.isRead) {
       emails = emails.filter(email => email.isRead === true)
     }
-
+    sortBy(emails,key)
     return emails
   })
 }
@@ -162,9 +164,13 @@ function save(email) {
     return storageService.post(MAILS_KEY, email);
   }
 }
+function moveToTrash(emailId){
+ return get(emailId).then(email=>storageService.post(TRASH_KEY, email))
+  .then(storageService.remove(MAILS_KEY, emailId))
+}
 
 function remove(emailId) {
-  return storageService.remove(MAILS_KEY, emailId);
+  return storageService.remove(TRASH_KEY, emailId);
 }
 
 function getDefaultFilter() {
@@ -173,7 +179,6 @@ function getDefaultFilter() {
 
 function getEmptyEmail() {
   return {
-
     subject: '',
     body: '',
     sentAt: Date.now(),
@@ -184,7 +189,7 @@ function getEmptyEmail() {
 
 function saveSent(email) {
   return storageService.post(MAILS_KEY, email)
-    .then(() => 
+    .then(() =>
       getSentEmails()
     )
 }
@@ -195,9 +200,7 @@ function sentEmailCount() {
     emails = emails.filter(email => email.from === loggedinUser.email)
     console.log(emails);
     return emails.length
-
   })
-
 }
 
 function inboxEmailCount() {
@@ -208,4 +211,12 @@ function inboxEmailCount() {
 
   })
 
+}
+
+function sortBy(emails, key, dir = 1) {
+  const isInt = ['from', 'to']
+  isInt.includes(key)
+    ? emails.sort((a, b) => a[key].localeCompare(b[key]) * dir)
+    : emails.sort((a, b) => (a[key] - b[key]) * dir)
+  return emails
 }

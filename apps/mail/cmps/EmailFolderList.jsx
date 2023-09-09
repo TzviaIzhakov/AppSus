@@ -3,7 +3,7 @@ const { useState, useEffect } = React
 import { mailService } from "../services/mail.service.js"
 
 
-export function EmailFolderList({state,dynClass}) {
+export function EmailFolderList({state,dynClass,setEmails}) {
   
   const [sentEmails, setSentEmails] = useState()
   const [inboxEmails, setInboxEmails] = useState()

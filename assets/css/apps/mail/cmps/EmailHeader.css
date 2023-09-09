@@ -15,18 +15,19 @@
 }
 
 .title {
+    /* margin-right: 20px; */
     font-size: 22px;
     align-items: center;
-  
+
 }
 
 .humburger {
-    scale: 0.7; 
+    scale: 0.7;
     cursor: pointer;
-   left: 0;
+    left: 0;
 }
 
-.humburger:hover{
+.humburger:hover {
     /* padding: 5px; */
     border-radius: 555px;
     background-color: rgb(213, 213, 213);
@@ -102,6 +103,7 @@
     translate: -0px;
     width: 150px;
 }
+
 .icon-text li {
     /* opacity: 0; */
     cursor: pointer;
@@ -113,7 +115,7 @@
     margin-top: 10px;
 }
 
-.side-bar:hover .icon-text{
+.side-bar:hover .icon-text {
     opacity: 1;
     translate: 90px;
     transition: 0.5s;

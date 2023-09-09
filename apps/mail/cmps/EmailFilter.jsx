@@ -32,19 +32,16 @@ export function EmailFilter({ filterBy, onSetFilterBy }) {
     ev.preventDefault()
     onSetFilterBy(filterByToEdit)
   }
-  const { subject, isRead } = filterByToEdit
+  const { isRead } = filterByToEdit
   return (
-    <section className="emails-filter">
+    <th className="emails-filter">
       <form onSubmit={onSubmitFilter}>
-        <div className="search-container">
-        <i className="fa-solid fa-magnifying-glass search-icon"></i>
-          <input className="search-bar" value={subject} onChange={handleChange} type="text" placeholder="search" id="subject" name="subject" />
-        </div>
-        <label htmlFor="isRead"> read only</label>
+       
+        <label htmlFor="isRead"> read</label>
         <input value={isRead} onChange={handleChange} type="checkbox" id="isRead" name="isRead" />
 
       </form>
-    </section>
+    </th>
 
   )
 }
