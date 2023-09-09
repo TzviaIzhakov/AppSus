@@ -4,13 +4,23 @@
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: fit-content;
-  background-color: #e0e4eade;
+  background-color: #ffffff;
   /* color: aliceblue; */
   padding: 5rem 6rem;
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
   transition: all 0.5s;
   z-index: 1000;
   height: max-content;
+}
+.edit-btn {
+  border-style: none;
+  background-color: inherit;
+}
+
+.update {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
 }
 
 .overlay {

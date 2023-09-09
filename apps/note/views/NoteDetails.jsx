@@ -22,7 +22,9 @@ export function NoteDetails({
       setDelete(true);
     }, 1000);
   }
-  if (!note) return <div>loading...</div>;
+  if (!note) {
+    return;
+  }
   return (
     <section>
       {!isDelete && (

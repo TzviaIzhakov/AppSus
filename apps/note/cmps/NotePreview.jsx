@@ -85,6 +85,7 @@ export function NotePreview({
               src="assets/icons-notes/trash.svg"
               alt=""
               className="delete-img"
+              title="delete"
             />
           </button>
           <button onClick={() => onSelectNoteId(note.id)}>
@@ -92,6 +93,7 @@ export function NotePreview({
               src="assets/icons-notes/edit-line.svg"
               alt=""
               className="update-img"
+              title="update"
             />
           </button>
           <button onClick={onShowPallate}>
@@ -99,6 +101,7 @@ export function NotePreview({
               src="assets/icons-notes/pallete-2-outline.svg"
               alt=""
               className="palette-img"
+              title="change color"
             />
           </button>
         </section>

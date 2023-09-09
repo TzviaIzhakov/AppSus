@@ -80,15 +80,24 @@ export function NoteTxt({ info, selected = '', updateNoteInList }) {
     return title;
   }
 
-  if (!noteToEdit && selected) {
-    return <div>loading...</div>;
-  }
+  // if (!noteToEdit && selected) {
+  //   return <div>Please wait few seconds</div>;
+  // }
   return (
     <article>
       {selected ? (
-        <form onSubmit={onSaveNote}>
+        <form onSubmit={onSaveNote} className="update">
+          <h2>Title</h2>
+          <input value={getTitle()} onChange={handleChange} name="title" />
+          <h1>Note</h1>
           <input value={getTxt()} onChange={handleChange} name="txt" />
-          <button>Update Changes</button>
+          <button className="edit-btn">
+            <img
+              src="assets/icons-notes/edit-line.svg"
+              alt=""
+              className="update-img"
+            />
+          </button>
         </form>
       ) : (
         <div>
