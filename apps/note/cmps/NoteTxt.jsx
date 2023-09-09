@@ -70,6 +70,16 @@ export function NoteTxt({ info, selected = '', updateNoteInList }) {
     return txt;
   }
 
+  function getTitle() {
+    let title;
+    if (noteToEdit && selected) {
+      title = noteToEdit.info.title;
+    } else {
+      title = info.title;
+    }
+    return title;
+  }
+
   if (!noteToEdit && selected) {
     return <div>loading...</div>;
   }
@@ -81,7 +91,10 @@ export function NoteTxt({ info, selected = '', updateNoteInList }) {
           <button>Update Changes</button>
         </form>
       ) : (
-        <p>{getTxt()}</p>
+        <div>
+          <h1>{getTitle()}</h1>
+          <p>{getTxt()}</p>
+        </div>
       )}
     </article>
   );

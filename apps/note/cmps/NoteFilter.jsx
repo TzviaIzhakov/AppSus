@@ -44,7 +44,9 @@ export function NoteFilter({ onSetFilterBy, filterBy }) {
   return (
     <form onSubmit={onSubmitFilter} className="filter">
       <div className="search-icon-container">
-        <img src="assets/icons-notes/search.svg" alt="search-icon" />
+        <button className="search-icon">
+          <img src="assets/icons-notes/search.svg" alt="search-icon" />
+        </button>
       </div>
       <input
         type="text"
@@ -53,7 +55,7 @@ export function NoteFilter({ onSetFilterBy, filterBy }) {
         name="txt"
         onChange={handleChange}
       />
-      <button>submit</button>
+
       {/*  */}
     </form>
   );

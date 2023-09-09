@@ -74,7 +74,6 @@ function update(note) {
 }
 
 function getEmptyNote(currCopm) {
-  //right now it giving me the defualt note as type: txt
   console.log(currCopm);
   if (currCopm === 'txt') {
     return {
@@ -87,6 +86,7 @@ function getEmptyNote(currCopm) {
       },
       info: {
         txt: '',
+        title: '',
       },
     };
   } else if (currCopm === 'url') {

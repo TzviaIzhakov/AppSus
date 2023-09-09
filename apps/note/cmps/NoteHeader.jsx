@@ -11,6 +11,7 @@ export function NoteHeader({ filterBy, onSetFilterBy }) {
         onSetFilterBy={onSetFilterBy}
         className="filter"
       />
+      {/* <hr /> */}
     </header>
   );
 }
