@@ -14,7 +14,7 @@ export function NotePreview({
   const [isShowPallete, setShowPallete] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState(note);
   const [backgroundColor, setBackgroundColor] = useState({
-    backgroundColor: '#ffffff',
+    backgroundColor: noteToEdit.style,
   });
   const paletteContainerRef = useRef(null);
 
@@ -44,6 +44,11 @@ export function NotePreview({
     };
   }, [isShowPallete]);
 
+  useEffect(() => {
+    console.log(`Note Edited! ${noteToEdit.id}`);
+    updateNoteInList(noteToEdit);
+  }, [noteToEdit]);
+
   function onSaveNote() {
     noteService
       .save(noteToEdit)
@@ -71,8 +76,6 @@ export function NotePreview({
       ...prevNoteToEdit,
       style: backGroungColor,
     }));
-    console.log(noteToEdit);
-    onSaveNote();
   }
 
   return (

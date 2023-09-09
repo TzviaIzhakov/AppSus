@@ -42,9 +42,13 @@ export function NoteIndex() {
   }
 
   const updateNoteInList = (updatedNote) => {
-    setNotes((prevNotes) =>
-      prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
-    );
+    noteService.save(updatedNote).then((updatedNote) => {
+      setNotes((prevNotes) =>
+        prevNotes.map((note) =>
+          note.id === updatedNote.id ? updatedNote : note
+        )
+      );
+    });
   };
 
   function onRemoveNote(noteId) {

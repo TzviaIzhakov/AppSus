@@ -29,6 +29,10 @@
     border-style: none;
     padding: 0 50px;
   }
+  .notes-list {
+    margin: auto;
+    width: 60vw;
+  }
 }
 /* SMALL */
 @media (min-width: 600px) {
