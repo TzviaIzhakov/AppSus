@@ -115,12 +115,18 @@
     margin-top: 10px;
 }
 
-.side-bar:hover .icon-text {
+/* .side-bar:hover .icon-text {
     opacity: 1;
     translate: 90px;
     transition: 0.5s;
     background-color: #f6f8fc;
-}
+} */
+
+.side-bar:hover .icon-text{
+    opacity: 1;
+   
+    background-color: red;
+} 
 
 .compose {
     /* background-color: #c2e7ff; */

@@ -32,7 +32,7 @@
 .emails-table .remove {
   display: none;
   height: 100%;
- /* position: absolute; */
+ position: absolute;
 
 }
 

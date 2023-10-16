@@ -12,32 +12,31 @@ export function EmailCompose() {
   useEffect(() => {
 
     mailService.getDraft()
-      .then(email=>{
-        console.log(email,'email');
-        setEmailTosend(email)
-        // console.log(emailTosend)
-      })
-      .then(email=>console.log(emailTosend))
-      .then(() => {
-        if (!emailTosend) setEmailTosend(mailService.getEmptyEmail())
-        console.log(emailTosend, 'emialtosend');
-      })
+      .then(email => {
+        console.log(email, 'email');
 
-    console.log(emailTosend, 'emialtosend');
-    intervalId.current = setInterval(() => {
+        email!==undefined ? setEmailTosend(email) : setEmailTosend(mailService.getEmptyEmail())
+        console.log(emailTosend)
+      })
+  
+
+    // console.log(emailTosend, 'emialtosend');
+
+
+  
+  }, [])
+
+  useEffect(()=>{
+    intervalId.current = setTimeout(() => {
       console.log(emailTosend, 'emialtosend');
       mailService.saveDraft(emailTosend)
     }, 5000);
-
-    return () => {
-      clearInterval(intervalId.current)
-    }
-  }, [])
+  },[emailTosend])
 
   function handleChange({ target }) {
     const field = target.name
     let value = target.value
-    console.log(field, value);
+    // console.log(field, value);
     setEmailTosend(prevEmail => ({ ...prevEmail, [field]: value }))
     console.log(emailTosend);
   }
@@ -54,6 +53,7 @@ export function EmailCompose() {
   }
 
   if (!emailTosend) return
+  console.log(emailTosend,'emailtosend');
   const { subject, body, to } = emailTosend
   return (<section className="compsoe-modal">
     <div className="flex space-between modal-header"><span>new message</span> <button onClick={closeModal}>x</button></div>

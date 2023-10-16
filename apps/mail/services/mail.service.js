@@ -397,4 +397,4 @@ function getDraft() {
   .then(email => (email[0]))
 }
 
-// storageService.post(DRAFT_KEY, getEmptyEmail())
+//  storageService.post(DRAFT_KEY, getEmptyEmail())

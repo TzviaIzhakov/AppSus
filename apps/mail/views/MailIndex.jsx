@@ -64,9 +64,12 @@ export function MailIndex() {
         mailService.get(emailId)
             .then(email => {
                 email.isStar = !email.isStar
-                mailService.save(email)
+               return mailService.save(email)
+                
                 
             })
+           
+
            
     }
 
